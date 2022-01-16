@@ -1,0 +1,34 @@
+# sql draft
+sql/test.sql
+
+# vscode files
+*.code-workspace
+
+# database connection examples
+dbconfig.js
+example.js
+demodrop.js
+
+# node modules
+node_modules
+
+# environment variables
+.env
+
+# js testing
+draft.js
+
+# public data like images
+public/public-images
+
+# problem data
+problem-data/tests
+problem-data/submissions
+problem-data/environment
+
+# stuff to test code
+code-testing
+
+# Intellij stuffs
+.idea
+.vscode

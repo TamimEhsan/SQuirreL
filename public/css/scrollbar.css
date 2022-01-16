@@ -1,0 +1,23 @@
+/* Works on Firefox */
+.my-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: grey white;
+    padding:10px;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.my-scrollbar::-webkit-scrollbar {
+    width: 12px;
+    color:grey;
+
+}
+.my-scrollbar::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 20px;
+    border: 3px solid white;
+}
+
+.card-block {
+    min-height: 300px;
+    width: 150px;
+}
