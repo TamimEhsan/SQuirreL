@@ -12,6 +12,10 @@ const router = express.Router({mergeParams : true});
 const signupRouter = require('./auth/signup');
 const loginRouter = require('./auth/login');
 const logoutRouter = require('./auth/logout');
+
+const bookRouter = require('./Books/book');
+const authorRouter = require('./Author/author');
+const publisherRouter = require('./Publisher/publisher');
 /*const userRouter = require('./users/users.js');
 const profileRouter = require('./profile/profile');
 const blogRouter = require('./blog/blog');
@@ -58,6 +62,9 @@ router.get('/', async (req, res) =>{
 router.use('/signup', signupRouter);
 router.use('/login', loginRouter);
 router.use('/logout', logoutRouter);
+router.use('/books', bookRouter);
+router.use('/authors', authorRouter);
+router.use('/publishers', publisherRouter);
 /*router.use('/users', userRouter);
 router.use('/profile', profileRouter);
 router.use('/blog', blogRouter);

@@ -1,39 +1,46 @@
+<% if (navbar === undefined) {var navbar = 0;} console.log(navbar) %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+                aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Writers
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+            <ul class="navbar-nav nav-tabs">
+                <li>
+                    <% if(navbar === 0){ %>
+                        <a class="nav-link active" href="/">Home</a>
+                    <% }else{ %>
+                        <a class="nav-link" href="/">Home</a>
+                    <% } %>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownSubjects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Subjects
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropDownSubjects">
-                        <li><a class="dropdown-item" href="#">Sub1</a></li>
-                        <li><a class="dropdown-item" href="#">Sub2</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                <li>
+                    <% if(navbar === 1){ %>
+                        <a class="nav-link active" href="/books">Books</a>
+                    <% }else{ %>
+                        <a class="nav-link" href="/books">Books</a>
+                    <% } %>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownSubjects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Publishers
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropDownSubjects">
-                        <% for(let i=0;i<publishers.length;i++){ %>
-                            <li><a class="dropdown-item" href="#"><%=publishers[i]%></a></li>
-                        <%}%>
-                    </ul>
+                <li>
+                    <% if(navbar === 2){ %>
+                        <a class="nav-link active" href="/authors">Writers</a>
+                    <% }else{ %>
+                        <a class="nav-link" href="/authors">Writers</a>
+                    <% } %>
+                </li>
+                <li>
+                    <% if(navbar === 3){ %>
+                        <a class="nav-link active" href="/publishers">Publishers</a>
+                    <% }else{ %>
+                        <a class="nav-link" href="/publishers">Publishers</a>
+                    <% } %>
+                </li>
+                <li>
+                    <% if(navbar === 4){ %>
+                        <a class="nav-link active" href="#">Best Sellers</a>
+                    <% }else{ %>
+                        <a class="nav-link" href="#">Best Sellers</a>
+                    <% } %>
                 </li>
             </ul>
         </div>
