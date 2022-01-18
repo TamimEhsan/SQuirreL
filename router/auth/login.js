@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     // if not logged in take to login page
     if(req.user == null){
         const errors = [];
-        res.render('layout.ejs', {
+        return res.render('layout.ejs', {
             title : 'Login - Squirrel',
             body : ['login'],
             user : null,
