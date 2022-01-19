@@ -42,4 +42,9 @@ router.get('/', async (req, res) =>{
 });
 
 
+router.get('/delete/:bookID', async (req,res) =>{
+    await DB_cart.deleteItemFromCart(req.user.id,req.params.bookID);
+    console.log(req.user.id,req.params.bookID);
+    return res.redirect('/cart');
+})
 module.exports = router;
