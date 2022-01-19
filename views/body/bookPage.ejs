@@ -1,4 +1,36 @@
-<nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';">
+
+<script>
+    let ID = '<%= book.ID%>';
+    function makePUTrequest() {
+        $.ajax({
+            url: `/cart/${ID}`,
+            type: 'POST',
+            /*success: function (result) {
+                var toastLiveExample = document.getElementById('liveToast')
+                if (toastTrigger) {
+                        var toast = new bootstrap.Toast(toastLiveExample)
+                        toast.show()
+                }
+            },*/
+            statusCode: {
+                200:function (){
+                    var toastLiveExample = document.getElementById('liveToast')
+                    var toast = new bootstrap.Toast(toastLiveExample)
+                    toast.show();
+                },
+                204: function() {
+                    var toastLiveExample = document.getElementById('liveToastError')
+
+                    var toast = new bootstrap.Toast(toastLiveExample)
+                    toast.show()
+
+                }
+            }
+        });
+    }
+</script>
+
+<nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';" xmlns="http://www.w3.org/1999/html">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
         <li class="breadcrumb-item"><a href="/books">Books</a></li>
@@ -13,10 +45,11 @@
             </div>
             <div class="col">
                 <h3><%= book.NAME %></h3>
-                <p>by - <a href=<%='/authors/'+book.AUTHOR_ID%>><%= book.AUTHOR_NAME %></a></p>
+                <p>by - <a href=<%= '/authors/' + book.AUTHOR_ID %>><%= book.AUTHOR_NAME %></a></p>
                 <h4>TK. <%= book.PRICE %></h4>
                 <% if(book.STOCK !== 0){ %>
-                    <button class="btn btn-lg"
+
+                    <button class="btn btn-lg" onclick="makePUTrequest()"
                             style="background-color: #ff9900;color:white; padding-bottom: 0;padding-top: 0;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                              class="m-3 bi bi-cart3" viewBox="0 0 16 16">
@@ -154,3 +187,44 @@
 </div>
 </div>
 </div>
+
+
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Squirrel</strong>
+            <small>Now</small
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Successfully added to your cart!
+        </div>
+    </div>
+
+    <div id="liveToastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Squirrel</strong>
+            <small>Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Already added in cart
+        </div>
+    </div>
+</div>
+
+<!--<script>-->
+<!--    var toastTrigger = document.getElementById('liveToastBtn')-->
+<!--    var toastLiveExample = document.getElementById('liveToast')-->
+<!--    if (toastTrigger) {-->
+<!--        toastTrigger.addEventListener('click', function (id) {-->
+<!--            var toast = new bootstrap.Toast(toastLiveExample)-->
+<!--            console.log(id,"sdfsdf");-->
+<!--            toast.show()-->
+<!--        })-->
+<!--    }-->
+<!--    function makePUTreques3t() {-->
+<!--        console.log("baaaaaaaaaaaaaaaaaaa");-->
+<!--    }-->
+<!--</script>-->

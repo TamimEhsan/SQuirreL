@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 // my modules
 const DB_auth = require('../../Database/DB-auth-api');
+const DB_cart = require('../../Database/DB-cart-api');
 const authUtils = require('../../utils/auth-utils');
 
 // creating router
@@ -92,7 +93,8 @@ router.post('/', async (req, res) => {
                     let result = await DB_auth.createNewUser(user);
                     let result2 = await DB_auth.getLoginInfoByEmail(user.email);
                     // login the user too
-                    await authUtils.loginUser(res, result2.id)
+                    await DB_cart.addNewCart(result2[0].ID);
+                    await authUtils.loginUser(res, result2[0].ID)
                     // redirect to home page
                     //res.redirect(`/profile/${user.handle}/settings`);
                     res.redirect('/');
