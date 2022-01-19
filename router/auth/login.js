@@ -12,7 +12,8 @@ const router = express.Router({mergeParams : true});
 // ROUTE: login (get)
 router.get('/', (req, res) => {
     // if not logged in take to login page
-    if(req.user == null){
+    //console.log(req);
+    if(req.user == null) {
         const errors = [];
         res.render('layout.ejs', {
             title : 'Login - Squirrel',
@@ -34,6 +35,7 @@ router.get('/', (req, res) => {
 // Launches when submit button is pressed on form
 router.post('/', async (req, res) => {
     // if not logged in take perform the post
+    console.log(req.body);
     if(req.user == null){
         let results, errors = [];
         // get login info for handle (id, handle, password)
