@@ -18,8 +18,13 @@ async function getAllCarts(userID){
 
 async function getItemsInCart(userId){
     const sql =`
-        SELECT * FROM picked
+        SELECT picked.*,
+        book.id as book_id,book.name as book_name,book.price, book.image, 
+        author.name as author_name
+        FROM picked
         JOIN app_user ON app_user.cart_id = picked.cart_id and app_user.id = :userId
+        JOIN book ON book.id = picked.book_id
+        JOIN author on author.id = book.author_id
     `;
     const binds = {
         userId:userId
@@ -27,6 +32,19 @@ async function getItemsInCart(userId){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function deleteItemFromCart(userId,bookId){
+    const sql = `
+        DELETE FROM picked
+        WHERE book_id = :bookId
+        AND cart_id = (SELECT cart_id FROM app_user WHERE id = :userId)
+   `;
+    const binds = {
+        bookId:bookId,
+        userId:userId
+    };
+    (await database.execute(sql, binds, database.options));
+    return;
+}
 async function getCartByID(userID,cartID){
     const sql = `
         SELECT 
@@ -104,5 +122,6 @@ module.exports = {
     addNewCart,
     addToCart,
     checkCart,
-    getItemsInCart
+    getItemsInCart,
+    deleteItemFromCart
 }
