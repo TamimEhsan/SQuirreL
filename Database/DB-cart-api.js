@@ -116,6 +116,17 @@ async function addToCart(userID,bookID){
     return;
 
 }
+async function updateAmount(ID,amount){
+    const sql = `
+        UPDATE  picked SET amount = :amount WHERE id = :id
+    `;
+    const binds = {
+        amount:amount,
+        id:ID
+    }
+    const updateResult = await database.execute(sql, binds, database.options);
+    return;
+}
 module.exports = {
     getAllCarts,
     getCartByID,
@@ -123,5 +134,6 @@ module.exports = {
     addToCart,
     checkCart,
     getItemsInCart,
-    deleteItemFromCart
+    deleteItemFromCart,
+    updateAmount
 }
