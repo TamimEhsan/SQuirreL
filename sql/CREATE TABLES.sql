@@ -166,4 +166,6 @@ alter table BOOK
 alter table BOOK
 	add EDITION VARCHAR2(100);
 
-
+alter table PICKED
+	add AMOUNT NUMBER default 1
+    CONSTRAINT PICKED_AMOUNT_MIN_MAX_VALUE check(AMOUNT between 1 and 5);
