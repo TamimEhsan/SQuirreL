@@ -32,3 +32,6 @@ code-testing
 # Intellij stuffs
 .idea
 .vscode
+
+# my useless stuff
+pdfLayout

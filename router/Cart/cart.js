@@ -1,6 +1,7 @@
 // libraries
 const express = require('express');
 const DB_cart = require('../../Database/DB-cart-api');
+const DB_Order = require('../../Database/DB-order-api');
 // creating router
 const router = express.Router({mergeParams : true});
 
@@ -13,7 +14,25 @@ router.post('/update', async (req,res) =>{
     }
     return res.sendStatus(200);
 });
+router.post('/confirmOrder', async (req,res) =>{
 
+    const userId = req.user.id;
+    const cartIdResult = await DB_cart.getAssignedCart(userId)
+    const cartId = cartIdResult[0].CART_ID;
+
+    const priceResult = await DB_cart.getTotalPriceAndItem(cartId);
+    console.log(priceResult);
+    if(priceResult[0].ITEM === 0 || cartId !== (req.body.cartId-0) ){
+        // do something
+        console.log("was here")
+        return res.redirect('/cart');
+    }
+    const {voucherId,name,phone,phone2,address,pick} = req.body;
+    await DB_Order.createOrderFromCart(cartId,voucherId,priceResult[0].PRICE,priceResult[0].ITEM,name,phone,phone2,address,pick);  //cartId,voucherId,total_price,total_item,name,phone1,phone2,address,pick
+    await DB_cart.addNewCart(userId);
+
+    return res.redirect('/my-section/orders');
+});
 router.post('/:bookID', async (req, res) =>{
     // if logged in, delete token from database
     if(req.user === null){
@@ -59,5 +78,32 @@ router.get('/delete/:bookID', async (req,res) =>{
     return res.redirect('/cart');
 });
 
+
+
+router.get('/ship', async (req,res) =>{
+
+    const userId = req.user.id;
+    const cartIdResult = await DB_cart.getAssignedCart(userId)
+    const cartId = cartIdResult[0].CART_ID;
+    const priceResult = await DB_cart.getTotalPrice(cartId);
+    console.log('hello there general kenobi',priceResult[0]);
+    if( !priceResult[0].PRICE ){
+        // do something
+        return res.redirect('/');
+    }
+    // await DB_Order.createOrderFromCart(cartId);
+    // await DB_cart.addNewCart(userId);
+    console.log(priceResult[0].PRICE)
+    return  res.render('layout.ejs', {
+        user:req.user,
+        body:['placeOrder'],
+        title:'Cart',
+        navbar:-1,
+        cart:{
+            cartId:cartId,
+            price:priceResult[0].PRICE
+        }
+    });
+});
 
 module.exports = router;

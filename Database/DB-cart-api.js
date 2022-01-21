@@ -16,6 +16,19 @@ async function getAllCarts(userID){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function getAssignedCart(userId){
+    const sql = `
+        SELECT 
+            cart_id
+        FROM 
+            app_user
+        WHERE id = :userID
+        `;
+    const binds = {
+        userID:userId
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
+}
 async function getItemsInCart(userId){
     const sql =`
         SELECT picked.*,
@@ -28,6 +41,24 @@ async function getItemsInCart(userId){
     `;
     const binds = {
         userId:userId
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
+async function getItemsInCartByCartId(userId,cartId){
+    const sql =`
+        SELECT picked.*,
+        book.id as book_id,book.name as book_name,book.price, book.image, 
+        author.name as author_name
+        FROM picked
+        JOIN cart ON cart.id = :cartId AND cart.user_id = :userId
+        JOIN book ON book.id = picked.book_id
+        JOIN author ON author.id = book.author_id
+        WHERE cart_id = :cartId
+    `;
+    const binds = {
+        userId:userId,
+        cartId:cartId
     }
     return (await database.execute(sql, binds, database.options)).rows;
 }
@@ -64,7 +95,7 @@ async function getRecentCart(userID){
     const sql = `
         SELECT * FROM cart 
         WHERE user_id = :userID
-        ORDER BY created_at
+        ORDER BY created_at DESC
     `
     const binds = {
         userID:userID
@@ -127,13 +158,42 @@ async function updateAmount(ID,amount){
     const updateResult = await database.execute(sql, binds, database.options);
     return;
 }
+
+async function getTotalPrice(cartId){
+    const sql = `
+        SELECT SUM(price) AS PRICE FROM picked
+        JOIN book ON picked.book_id = book.id
+        WHERE cart_id = :cartId
+    `;
+    const binds = {
+        cartId:cartId,
+    }
+
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+async function getTotalPriceAndItem(cartId){
+    const sql = `
+        SELECT SUM(price) AS PRICE, SUM(AMOUNT) AS ITEM FROM picked
+        JOIN book ON picked.book_id = book.id
+        WHERE cart_id = :cartId
+    `;
+    const binds = {
+        cartId:cartId,
+    }
+
+    return (await database.execute(sql, binds, database.options)).rows;
+}
 module.exports = {
     getAllCarts,
     getCartByID,
+    getAssignedCart,
     addNewCart,
     addToCart,
     checkCart,
     getItemsInCart,
     deleteItemFromCart,
-    updateAmount
+    updateAmount,
+    getTotalPrice,
+    getTotalPriceAndItem,
+    getItemsInCartByCartId
 }

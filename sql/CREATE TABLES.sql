@@ -169,3 +169,10 @@ alter table BOOK
 alter table PICKED
 	add AMOUNT NUMBER default 1
     CONSTRAINT PICKED_AMOUNT_MIN_MAX_VALUE check(AMOUNT between 1 and 5);
+
+alter table BOOK_ORDER
+	add NAME VARCHAR2(100) not null
+	add phone1 VARCHAR2(20) not null
+	add phone2 VARCHAR2(20)
+	add address VARCHAR2(1000)
+	add pick NUMBER default 1 not null

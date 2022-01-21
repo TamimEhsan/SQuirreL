@@ -1,12 +1,19 @@
 <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-light dropdown-toggle border" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <img class="rounded-circle" src="https://avatars.githubusercontent.com/u/54908501?v=4" width="36px">
         <%=user.name%>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><form action="/logout" method="POST" class="my-logout-form">
-                <input type="submit" value="log out" class="btn btn-link my-non-btn">
+        <li><a class="dropdown-item" href="#">My Account</a></li>
+        <li><a class="dropdown-item" href="/my-section/orders">My Orders</a></li>
+        <li><a class="dropdown-item" href="#">My list</a></li>
+        <li><a class="dropdown-item" href="#">My Wishlist</a></li>
+        <li><a class="dropdown-item" href="#">My Rating Reviews</a></li>
+        <li><a class="dropdown-item" href="#">My Points</a></li>
+        <hr>
+        <li>
+            <form  action="/logout" method="POST" class="my-logout-form">
+                <input type="submit" value="Sign Out" class="btn  my-non-btn">
             </form>
         </li>
     </ul>
