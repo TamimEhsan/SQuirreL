@@ -1,3 +1,5 @@
+
+
 <div class="row">
     <div class=" col-8">
         <div class="shadow row p-2 m-0 mb-2  justify-content-between">
@@ -9,7 +11,7 @@
                 <button class="btn btn-success" onclick="sendItemCountUpdate()">Save Changes</button>
             </div>
         </div>
-        <div class="shadow"  style="background-color: #fffaf4">
+        <div class="shadow" style="background-color: #fffaf4">
             <% for(let i = 0;i < items.length;i++){ %>
                 <div class="row p-3 border-bottom">
                     <div class="col-2">
@@ -45,14 +47,16 @@
                                            id=<%= 'input' + i %>
 
                                            class="col m-0 p-0 btn img-fluid form-control bg-white shadow-none disabled"
-                                    id="js--productQuantity-217978" value=<%=items[i].AMOUNT%> data-toggle="tooltip" data-title=""
+                                    id="js--productQuantity-217978" value=<%= items[i].AMOUNT %> data-toggle="tooltip"
+                                    data-title=""
                                     data-type="error" pid="217978" data-original-title="" title="">
                                     <button style="width: 26px;height: 26px; border-radius: 0"
                                             id=<%= 'addBtn' + i %>
                                             class="bg-light border-start col m-0 p-0 btn js-plus-btn
                                     " id="btn-plus"
                                     data-toggle="tooltip"
-                                    data-title="Do you want to buy more than 99 copies? Please contact us on 01708166233?"
+                                    data-title="Do you want to buy more than 99 copies? Please contact us on
+                                    01708166233?"
                                     data-type="info" data-original-title="" title="">
                                     <ion-icon name="add-outline"></ion-icon>
                                     </button>
@@ -61,13 +65,18 @@
 
                             </div>
                             <div class="col-3">
-                                <b  id=<%= 'price' + i %> >TK: <%= items[i].PRICE %></b>
+                                <b id=<%= 'price' + i %>>TK: <%= items[i].PRICE %></b>
                             </div>
                         </div>
                     </div>
 
                 </div>
             <% } %>
+        </div>
+
+        <div class="shadow p-2">
+            <p>Henlo</p>
+            <a class="btn btn-danger" href="/cart/ship">Place Order</a>
         </div>
     </div>
 
@@ -185,10 +194,6 @@
 </div>
 
 
-
-
-
-
 <!--popup-->
 
 
@@ -221,43 +226,43 @@
     let items = <%- JSON.stringify(items) %>;
 
     for (let i = 0; i < items.length; i++) {
-        total+=items[i].PRICE;
+        total += items[i].PRICE;
         document.getElementById(`addBtn${i}`).onclick = (function (a) {
             return function () {
-                total-=items[i].AMOUNT*items[i].PRICE;
-                items[i].AMOUNT = Math.min(items[i].AMOUNT+1,5);
+                total -= items[i].AMOUNT * items[i].PRICE;
+                items[i].AMOUNT = Math.min(items[i].AMOUNT + 1, 5);
                 document.getElementById(`input${i}`).value = items[i].AMOUNT;
-                total+=items[i].AMOUNT*items[i].PRICE;
-                document.getElementById(`price${i}`).innerText ="TK: "+  items[i].AMOUNT*items[i].PRICE ;
-                document.getElementById('total-top').innerText = total ;
+                total += items[i].AMOUNT * items[i].PRICE;
+                document.getElementById(`price${i}`).innerText = "TK: " + items[i].AMOUNT * items[i].PRICE;
+                document.getElementById('total-top').innerText = total;
             };
         })(i);
         document.getElementById(`subBtn${i}`).onclick = (function (a) {
             return function () {
-                total-=items[i].AMOUNT*items[i].PRICE;
-                items[i].AMOUNT = Math.max(items[i].AMOUNT-1,1);
+                total -= items[i].AMOUNT * items[i].PRICE;
+                items[i].AMOUNT = Math.max(items[i].AMOUNT - 1, 1);
                 document.getElementById(`input${i}`).value = items[i].AMOUNT;
-                total+=items[i].AMOUNT*items[i].PRICE;
-                document.getElementById(`price${i}`).innerText = "TK: "+ items[i].AMOUNT*items[i].PRICE ;
-                document.getElementById('total-top').innerText = total ;
+                total += items[i].AMOUNT * items[i].PRICE;
+                document.getElementById(`price${i}`).innerText = "TK: " + items[i].AMOUNT * items[i].PRICE;
+                document.getElementById('total-top').innerText = total;
             };
         })(i);
     }
-    document.getElementById('total-top').innerText = total ;
+    document.getElementById('total-top').innerText = total;
 
 
-    function sendItemCountUpdate(){
+    function sendItemCountUpdate() {
         $.ajax({
             url: `/cart/update`,
             type: 'POST',
             data: {items: JSON.stringify(items)},
             statusCode: {
-                200:function (){
+                200: function () {
                     var toastLiveExample = document.getElementById('liveToast')
                     var toast = new bootstrap.Toast(toastLiveExample)
                     toast.show();
                 },
-                204: function() {
+                204: function () {
                     var toastLiveExample = document.getElementById('liveToastError')
                     var toast = new bootstrap.Toast(toastLiveExample)
                     toast.show()
