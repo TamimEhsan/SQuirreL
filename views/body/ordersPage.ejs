@@ -48,13 +48,13 @@
                 </div>
             </div>
         </section>
-        <%let statues = ['PROCESSING','APPROVED','ON SHIPPING','SHIPPED','COMPLETED','CANCELLED','RETURNED'];console.log(items[0]);%>
+        <%let statues = ['PROCESSING','APPROVED','ON SHIPPING','SHIPPED','COMPLETED','CANCELLED','RETURNED'];%>
         <div class="d-flex flex-wrap justify-content-evenly">
             <%for(let i =0;i<items.length;i++){%>
             <div class="shadow mt-3 p-3">
                 <h5><b>Your Order Id: <%=items[i].ID%></b></h5>
                 <hr>
-                <span class="btn btn-outline-primary m-2 disabled"><%=statues[ items[i].STATE ]%></span>
+                <span class="btn btn-outline-primary m-2 disabled"><%=statues[ items[i].STATE-1 ]%></span>
                 <a class="btn btn-outline-warning" href=<%='/my-section/orders/track/'+items[i].ID%>>Track Order</a>
                 <hr>
                 <h5>Price: <%=items[i].TOTAL_PRICE%></h5>
@@ -70,5 +70,5 @@
 
 <script>
     document.getElementById('orderStatus').value = '<%=_status%>';
-    console.log(document.getElementById('orderStatus'));
+   // console.log(document.getElementById('orderStatus'));
 </script>

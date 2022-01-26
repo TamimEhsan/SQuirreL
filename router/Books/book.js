@@ -1,6 +1,7 @@
 // libraries
 const express = require('express');
 const DB_book = require('../../Database/DB-book-api');
+const DB_review = require('../../Database/DB-review-api');
 
 // creating router
 const router = express.Router({mergeParams : true});
@@ -28,12 +29,18 @@ router.get('/:bookID', async (req, res) =>{
     const booksResult = await DB_book.getBookByID(req.params.bookID);
     if( booksResult.length === 0 )
         return res.redirect('/');
+    const canReview = await DB_review.hasBookOrdered(req.user.id,req.params.bookID);
+    let hasReviewd = await DB_review.hasReviewdBook(req.user.id,req.params.bookID);
+    let reviews = await DB_review.getAllReviewsByBook(req.params.bookID);
     res.render('layout.ejs', {
         user:req.user,
         body:['bookPage'],
         title:'Books',
         navbar:1,
-        book:booksResult[0]
+        book:booksResult[0],
+        reviews:reviews,
+        canReview:canReview,
+        hasReviewd:hasReviewd
     });
 });
 

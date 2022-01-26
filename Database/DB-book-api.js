@@ -16,17 +16,22 @@ async function getAllBooks(){
 
 async function getBookByID(ID){
     const sql = `
-        SELECT 
-            book.*, 
+        SELECT
+            book.id,book.name,book.PRICE,book.LANGUAGE,book.IMAGE,book.EDITION,book.ISBN,book.PAGE,book.PUBLISHING_YEAR,
+            COUNT(rates.stars) AS REVIEW_COUNT, NVL(SUM(rates.stars),0) AS STARS,
             author.id AS author_id,author.name AS author_name,author.description AS author_description, author.image AS author_image,
             publisher.name AS publisher_name
-        FROM 
+        FROM
             book
-        
+        LEFT JOIN rates ON rates.BOOK_ID = book.id
         JOIN author ON author.id = book.author_id
         JOIN publisher ON publisher.id = book.publisher_id
-        WHERE 
+        WHERE
             book.id = :id
+        GROUP BY
+                 book.id,book.name,book.PRICE,book.LANGUAGE,book.IMAGE,book.EDITION,book.ISBN,book.PAGE, book.PUBLISHING_YEAR,
+                 author.id, author.name, author.description, author.image,
+                 publisher.name
         `;
     const binds = {
         id:ID

@@ -16,6 +16,9 @@ const logoutRouter = require('./auth/logout');
 const bookRouter = require('./Books/book');
 const authorRouter = require('./Author/author');
 const publisherRouter = require('./Publisher/publisher');
+
+const reviewRouter = require('./Books/reviews');
+
 const cartRouter = require('./Cart/cart');
 const orderRouter = require('./My-Section/orders');
 
@@ -65,11 +68,16 @@ router.get('/', async (req, res) =>{
 router.use('/signup', signupRouter);
 router.use('/login', loginRouter);
 router.use('/logout', logoutRouter);
+
 router.use('/books', bookRouter);
 router.use('/authors', authorRouter);
 router.use('/publishers', publisherRouter);
+
+router.use('/reviews', reviewRouter);
+
 router.use('/cart', cartRouter);
 router.use('/my-section/orders', orderRouter);
+
 /*router.use('/users', userRouter);
 router.use('/profile', profileRouter);
 router.use('/blog', blogRouter);

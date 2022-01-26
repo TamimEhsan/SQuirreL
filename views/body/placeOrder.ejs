@@ -1,19 +1,32 @@
 <script>
-    const totalPrice = <%=cart.price%>;
-    function checkVoucher(){
+    const totalPrice = <%= cart.price %>;
+
+    function checkVoucher() {
 
         let voucherName = document.getElementById('coupon-field').value;
-        console.log(voucherName);
-        if( voucherName === 'DUMMY10' ){
-            // valid voucher
-            document.getElementById('voucherId').value = 1;
-            document.getElementById('giftvoucher').innerText = Math.floor(totalPrice*0.1);
-            document.getElementById('payable').innerText = totalPrice -  Math.floor(totalPrice*0.1);
+        $.get({
+            url: `/cart/voucher/${voucherName}`,
+            success: function (data, status) {
+                console.log(data.voucherId);
+                const voucherId = data.voucherId;
+                const discount = data.discount;
+                document.getElementById('voucherId').value = voucherId;
+                document.getElementById('giftvoucher').innerText = Math.floor(totalPrice*discount/100) + ' TK.';
+                document.getElementById('payable').innerText = ( totalPrice +50 -  Math.floor(totalPrice*discount/100) ) + ' TK.';
+                var toastLiveExample = document.getElementById('liveToast')
+                var toast = new bootstrap.Toast(toastLiveExample)
+                toast.show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                document.getElementById('voucherId').value = '';
+                document.getElementById('giftvoucher').innerText = '0 TK.';
+                document.getElementById('payable').innerText = (totalPrice + 50) + ' TK.';
 
-        }else{
-            // invalid voucher
-        }
-
+                var toastLiveExample = document.getElementById('liveToastError')
+                var toast = new bootstrap.Toast(toastLiveExample)
+                toast.show();
+            }
+        });
     }
 </script>
 
@@ -22,8 +35,7 @@
         <div class="content__wrapper">
 
             <form method="POST" class="js--confirm-order" action="/cart/confirmOrder">
-
-                <input type="hidden" name="cartId" id="cartId" value=<%=cart.cartId %>>
+                <input type="hidden" name="cartId" id="cartId" value=<%= cart.cartId %>>
                 <input type="hidden" name="isGift" id="isGift" value="false">
                 <input type="hidden" name="accountid" id="accountid" value="290331">
                 <input type="hidden" name="voucherId" id="voucherId" value="">
@@ -135,23 +147,16 @@
         <div class="checkout-sidebar__content">
 
             <div class="payment-breakdown">
-
+                <h4 class="m-3">Checkout Summary</h4>
+                <hr>
                 <div class="payment-breakdown__content">
                     <table class="table">
                         <tbody>
                         <tr>
                             <td>Subtotal</td>
-                            <td class="text-right" id="subtotal"><%= cart.price %>
-                                TK.
+                            <td class="text-right" id="subtotal"><%= cart.price %> TK.
                             </td>
                         </tr>
-
-                        <tr style="display: none" id="discounttr2">
-                            <td id="discounttext2">Discount</td>
-                            <td class="text-right" id="discount2">
-                            </td>
-                        </tr>
-
                         <tr>
                             <td>Shipping
                             </td>
@@ -160,7 +165,7 @@
                         </tr>
                         <tr>
                             <td>Total</td>
-                            <td class="text-right" id="total"><%= cart.price+50 %>TK.
+                            <td class="text-right" id="total"><%= cart.price + 50 %>TK.
                             </td>
                         </tr>
 
@@ -172,7 +177,7 @@
 
                         <tr class="payment-breakdown__content__table-last-tr" id="payabletr">
                             <td class="font-weight-bold">Payable Total</td>
-                            <td class="text-right font-weight-bold" id="payable"><%= cart.price+50 %>TK.
+                            <td class="text-right font-weight-bold" id="payable"><%= cart.price + 50 %>TK.
                             </td>
                         </tr>
                         </tbody>
@@ -195,7 +200,7 @@
                                data-validation-type="coupon">
 
                         <div class="input-group-append">
-                            <button class="btn btn-secondary"  onclick="checkVoucher()">
+                            <button class="btn btn-secondary" onclick="checkVoucher()">
                                 Apply
                             </button>
                         </div>
@@ -209,3 +214,29 @@
 </div>
 
 
+<!--popup-->
+
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Squirrel</strong>
+            <small>Now</small
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Voucher added successfully
+        </div>
+    </div>
+
+    <div id="liveToastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Squirrel</strong>
+            <small>Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Voucher doesn't exist or expired
+        </div>
+    </div>
+</div>

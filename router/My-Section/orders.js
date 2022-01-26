@@ -13,11 +13,18 @@ router.get('/', async (req, res) =>{
         return res.redirect('/login');
     }
     const userId = req.user.id;
-    const orderItems = await DB_Order.getAllOrder(userId);
-    // console.log(cartItems[0]);
+
+
     let status = 0
-    if(req.query.orderStatus)
+    if(req.query.orderStatus )
         status = req.query.orderStatus;
+    let orderItems;
+
+    if( status == 0 || status>7 )
+        orderItems = await DB_Order.getAllOrder(userId);
+    else
+        orderItems = await DB_Order.getAllOrderByStatus(userId,status);
+
     res.render('layout.ejs', {
         user:req.user,
         body:['ordersPage'],

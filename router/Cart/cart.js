@@ -2,6 +2,7 @@
 const express = require('express');
 const DB_cart = require('../../Database/DB-cart-api');
 const DB_Order = require('../../Database/DB-order-api');
+const DB_voucher = require('../../Database/DB-voucher-api');
 // creating router
 const router = express.Router({mergeParams : true});
 
@@ -78,10 +79,16 @@ router.get('/delete/:bookID', async (req,res) =>{
     return res.redirect('/cart');
 });
 
-
+router.get('/voucher/:voucherName', async (req,res) =>{
+    const voucherResult = await DB_voucher.getVoucherByName(req.params.voucherName);
+    if( voucherResult.length === 0 ) return res.sendStatus(404);
+    return res.status(200).send({voucherId:voucherResult[0].ID,discount:voucherResult[0].DISCOUNT});
+});
 
 router.get('/ship', async (req,res) =>{
-
+    if(req.user === null){
+        return res.redirect('/login');
+    }
     const userId = req.user.id;
     const cartIdResult = await DB_cart.getAssignedCart(userId)
     const cartId = cartIdResult[0].CART_ID;
