@@ -14,21 +14,38 @@ async function createOrderFromCart(cartId,voucherId,total_price,total_item,name,
 
 
 async function getAllOrder(userId){
+    console.log('hrllo');
     const sql = `
         SELECT 
             *
         FROM 
             book_order
         JOIN cart ON cart.id = book_order.cart_id and cart.user_id = :userId
+        ORDER BY book_order.ID DESC
         `;
     const binds = {
         userId:userId
     }
     return (await database.execute(sql, binds, database.options)).rows;
 }
+async function getAllOrderByStatus(userId,status){
+    const sql = `
+        SELECT 
+            *
+        FROM 
+            book_order
+        JOIN cart ON cart.id = book_order.cart_id and cart.user_id = :userId
+        WHERE STATE = :status
+        ORDER BY book_order.ID DESC
+        `;
+    const binds = {
+        userId:userId,
+        status:status
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
+}
 
 async function getOrderById(userId,orderId){
-    console.log(userId,"kenovi",orderId);
     const sql = `
         SELECT 
             *
@@ -46,5 +63,6 @@ async function getOrderById(userId,orderId){
 module.exports = {
     createOrderFromCart,
     getAllOrder,
-    getOrderById
+    getOrderById,
+    getAllOrderByStatus
 }

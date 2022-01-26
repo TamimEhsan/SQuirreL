@@ -175,4 +175,7 @@ alter table BOOK_ORDER
 	add phone1 VARCHAR2(20) not null
 	add phone2 VARCHAR2(20)
 	add address VARCHAR2(1000)
-	add pick NUMBER default 1 not null
+	add pick NUMBER default 1 not null;
+
+alter table RATES
+	add REVIEW VARCHAR2(1000)

@@ -1,5 +1,3 @@
-
-
 <div class="row">
     <div class=" col-8">
         <div class="shadow row p-2 m-0 mb-2  justify-content-between">
@@ -8,7 +6,12 @@
                 <b style="color: #33c24d">You are saving total TK. <span>0</span></b>
             </div>
             <div class="col-3">
-                <button class="btn btn-success" onclick="sendItemCountUpdate()">Save Changes</button>
+                <% if(items.length === 0){ %>
+                    <button class="btn btn-success disabled" onclick="sendItemCountUpdate()">Save Changes</button>
+                <% }else{ %>
+                    <button class="btn btn-success" onclick="sendItemCountUpdate()">Save Changes</button>
+                <% } %>
+
             </div>
         </div>
         <div class="shadow" style="background-color: #fffaf4">
@@ -74,73 +77,48 @@
             <% } %>
         </div>
 
-        <div class="shadow p-2">
-            <p>Henlo</p>
-            <a class="btn btn-danger" href="/cart/ship">Place Order</a>
+        <div class="shadow p-3 mt-3">
+            <span class="m-3">Order as many products as you want together, the shipping charge is only 50 taka</span>
+            <hr>
+            <% if(items.length === 0){ %>
+                <a class="btn btn-danger m-2 disabled" href="/cart/ship">Place Order</a>
+            <% }else{ %>
+                <a class="btn btn-danger m-2" href="/cart/ship">Place Order</a>
+            <% } %>
         </div>
     </div>
 
     <div class="col-4">
         <div class="checkout-sidebar__content">
 
-            <div class="payment-breakdown">
-
+            <div class="payment-breakdown mt-3">
+                <h4 class="m-3">Checkout Summary</h4>
+                <hr>
                 <div class="payment-breakdown__content">
                     <table class="table">
                         <tbody>
                         <tr>
                             <td>Subtotal</td>
-                            <td class="text-right" id="subtotal">402
-                                TK.
-                            </td>
-                        </tr>
-
-                        <tr style="display: none" id="discounttr2">
-                            <td id="discounttext2">Discount</td>
-                            <td class="text-right" id="discount2">
-                            </td>
-                        </tr>
-
-                        <tr id="wrappertr">
-                            <td id="wrappertext">Gift Wrap</td>
-                            <td class="text-right" id="wrapper">20
-                                TK.
-                            </td>
-                        </tr>
-
-                        <tr style="display: none" id="wrappertr2">
-                            <td id="wrappertext2">Gift Wrap</td>
-                            <td class="text-right" id="wrapper2">20
-                                TK.
+                            <td class="text-right" id="subtotal">402 TK.
                             </td>
                         </tr>
 
                         <tr>
                             <td>Shipping
-
                             </td>
-                            <td class="text-right" id="shipping">50
-                                TK.
+                            <td class="text-right" id="shipping">50 TK.
                             </td>
                         </tr>
                         <tr>
                             <td>Total</td>
-                            <td class="text-right" id="total">472
-                                TK.
+                            <td class="text-right" id="total">472 TK.
                             </td>
                         </tr>
 
-                        <tr style="display: none" id="giftvouchertr2">
-                            <td id="giftvouchertext2">Gift Voucher</td>
-                            <td class="text-right" id="giftvoucherpaid2">0
-                                TK.
-                            </td>
-                        </tr>
 
                         <tr class="payment-breakdown__content__table-last-tr" id="payabletr">
                             <td class="font-weight-bold">Payable Total</td>
-                            <td class="text-right font-weight-bold" id="payable">472
-                                TK.
+                            <td class="text-right font-weight-bold" id="payable">472 TK.
                             </td>
                         </tr>
                         </tbody>
@@ -148,48 +126,8 @@
                 </div>
             </div>
 
-
-            <div class="gift-wrap">
-                <div class="custom-control custom-checkbox">
-                    <input onclick="ga('send', 'event', 'Cart', 'Click', 'Cart-Gift_wrap-Click');" type="checkbox"
-                           class="custom-control-input" id="js-gift-checkbox" checked="checked">
-                    <label class="custom-control-label" for="js-gift-checkbox">
-                        Gift Wrap for Tk. 20
-                    </label>
-                </div>
-            </div>
-
         </div>
 
-        <div class="coupon-section">
-            <div class="card">
-                <div class="card-header js--coupon-header pb-2 pt-2">
-                    <p class="coupon-title">Add Promo code or Gift voucher <i
-                                class="ion-chevron-down ion-chevron-up"></i></p>
-                </div>
-                <div class="card-body js--coupon-body bg-light" style="display: block;">
-                    <form class="needs-validation" novalidate="">
-                        <div class="input-group input-coupon">
-                            <input disabled="" placeholder="Login required" type="text"
-                                   class="form-control coupon-field" id="js--coupon-field" data-validation="true"
-                                   data-validation-type="coupon">
-                            <input type="hidden" value="false" id="cartUpdateApplicable">
-                            <div class="input-group-append">
-                                <button disabled="" class="btn coupon-code-btn" type="button" id="js-coupon-btn">
-                                    Apply
-                                </button>
-                            </div>
-                            <div class="invalid-feedback">
-                                <p>Please enter your code.</p>
-                            </div>
-                            <div class="valid-feedback">
-                                <p></p>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -201,7 +139,7 @@
     <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <strong class="me-auto">Squirrel</strong>
-            <small>Now</small
+            <small>Now</small>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
@@ -234,7 +172,7 @@
                 document.getElementById(`input${i}`).value = items[i].AMOUNT;
                 total += items[i].AMOUNT * items[i].PRICE;
                 document.getElementById(`price${i}`).innerText = "TK: " + items[i].AMOUNT * items[i].PRICE;
-                document.getElementById('total-top').innerText = total;
+                updateTotals(total);
             };
         })(i);
         document.getElementById(`subBtn${i}`).onclick = (function (a) {
@@ -244,11 +182,19 @@
                 document.getElementById(`input${i}`).value = items[i].AMOUNT;
                 total += items[i].AMOUNT * items[i].PRICE;
                 document.getElementById(`price${i}`).innerText = "TK: " + items[i].AMOUNT * items[i].PRICE;
-                document.getElementById('total-top').innerText = total;
+                updateTotals(total);
             };
         })(i);
     }
-    document.getElementById('total-top').innerText = total;
+
+    function updateTotals(total){
+        document.getElementById('total-top').innerText = total;
+        document.getElementById('subtotal').innerText = total + ' TK.';
+        document.getElementById('total').innerText = (total+50) + ' TK.';
+        document.getElementById('payable').innerText = (total+50) + ' TK.';
+    }
+
+    updateTotals(total);
 
 
     function sendItemCountUpdate() {
