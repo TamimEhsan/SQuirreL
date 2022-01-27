@@ -31,8 +31,9 @@ function auth(req, res, next){
 
                     req.user = {
                         id: decodedId,
-                        email: results[0].EMAIL,
-                        name: results[0].NAME
+                        EMAIL: results[0].EMAIL,
+                        NAME: results[0].NAME,
+                        IMAGE:results[0].IMAGE
                     }
                 }
                 next();

@@ -178,4 +178,9 @@ alter table BOOK_ORDER
 	add pick NUMBER default 1 not null;
 
 alter table RATES
-	add REVIEW VARCHAR2(1000)
+	add REVIEW VARCHAR2(1000);
+
+alter table APP_USER
+    add PHONE varchar2(20)
+    add DOB varchar2(20)
+	add IMAGE VARCHAR2(1000) default '/images/no-profile-picture.jpg';

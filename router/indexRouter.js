@@ -20,7 +20,9 @@ const publisherRouter = require('./Publisher/publisher');
 const reviewRouter = require('./Books/reviews');
 
 const cartRouter = require('./Cart/cart');
+
 const orderRouter = require('./My-Section/orders');
+const profileRouter = require('./My-Section/profile');
 
 /*const userRouter = require('./users/users.js');
 const profileRouter = require('./profile/profile');
@@ -76,7 +78,9 @@ router.use('/publishers', publisherRouter);
 router.use('/reviews', reviewRouter);
 
 router.use('/cart', cartRouter);
+
 router.use('/my-section/orders', orderRouter);
+router.use('/my-section/profile', profileRouter);
 
 /*router.use('/users', userRouter);
 router.use('/profile', profileRouter);
