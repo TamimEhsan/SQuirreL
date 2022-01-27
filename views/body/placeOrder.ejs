@@ -7,7 +7,7 @@
         $.get({
             url: `/cart/voucher/${voucherName}`,
             success: function (data, status) {
-                console.log(data.voucherId);
+                //console.log(data.voucherId);
                 const voucherId = data.voucherId;
                 const discount = data.discount;
                 document.getElementById('voucherId').value = voucherId;

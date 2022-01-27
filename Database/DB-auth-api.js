@@ -63,7 +63,8 @@ async function getLoginInfoByID(id){
             ID,
             NAME,
             PASSWORD,
-            EMAIL
+            EMAIL,
+            IMAGE
         FROM
             APP_USER
         WHERE

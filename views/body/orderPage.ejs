@@ -90,10 +90,10 @@
     let step = <%=items.STATE%>
     step--;
     var elements = document.querySelectorAll('.step');
-    console.log(elements.length,step);
+    //console.log(elements.length,step);
     for(let i=0;i<step;i++){
         elements[i].classList.add('success');
-        console.log(elements[i]);
+       // console.log(elements[i]);
     }
     elements[step].classList.add('active');
 
