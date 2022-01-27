@@ -1,0 +1,138 @@
+
+<div class="row">
+    <div class="col-3">
+        <div class="shadow mt-3 p-2">
+            <div class="row no-gutters">
+                <div class="col-3">
+                    <img class="circular" src="<%= user.IMAGE %>" width="50">
+                </div>
+                <div class="col-9">
+                    <span>Hello</span>
+                    <h5><%= user.NAME %></h5>
+                </div>
+            </div>
+        </div>
+        <div class="shadow mt-3 p-2">
+            <div class="list-group list-group-flush">
+                <a href="/my-section/profile" class="list-group-item list-group-item-action" aria-current="true">My
+                    Account</a>
+                <a href="/my-section/orders" class="list-group-item list-group-item-action ">My Orders</a>
+                <a href="#" class="list-group-item list-group-item-action">My Lists</a>
+                <a href="#" class="list-group-item list-group-item-action">My Wishlist</a>
+                <a href="#" class="list-group-item list-group-item-action active">My Ratings and Reviews</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+        <section class="shadow p-3 mt-3 d-flex justify-content-between">
+            <h3>My reviews</h3>
+        </section>
+        <section class="shadow mt-3 p-3">
+            <ul class="nav nav-tabs justify-content-center">
+                <li class="nav-item active">
+                    <a href="#reviewed" class="nav-link active" data-bs-toggle="tab">Reviewed</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#unreviewed" class="nav-link" data-bs-toggle="tab">Not Reviewed</a>
+                </li>
+
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="reviewed">
+                    <% for(let i = 0;i < books.length;i++){ %>
+                        <div class="row p-3">
+                            <div class="col-3">
+                                <img src="<%= books[i].IMAGE %>" width="130px" height="186px">
+                            </div>
+                            <div class="col-9">
+                                <h5><%= books[i].BOOK_NAME %></h5>
+                                <p class="book-author pt-1"><%= books[i].AUTHOR_NAME %></p>
+                                <p class="mt-2 rating-star">
+                                    <%for(let j=0;j<books[i].STARS;j++){%>⭐<%}%><%=books[i].STARS%>
+                                    <span class="text-secondary small ml-2">(You rated this book)</span>
+                                </p>
+                                <div class="mt-3">
+                                <span class="text-secondary mb-2 review-details"><%= books[i].REVIEW %></span>
+
+                                </div>
+                                <button id=<%= "editReviewBtn" + books[i].ID %> class="btn btn-dark btn-sm mt-2">Edit Your Review</button>
+                            </div>
+                        </div>
+
+                        <div class="p-3 d-none" id=<%="ratings_reviews_form"+books[i].ID%>>
+                            <form class="js--review-form" action="/my-section/reviews/edit" method="POST">
+                                <div class="form-group">
+                                    <input type="hidden" name="bookId" id="bookId" value=<%= books[i].BOOK_ID %>>
+                                    <input type="hidden" name="reviewId" id="bookId" value=<%= books[i].ID %>>
+                                    <textarea required maxlength="500" name="review" class="form-control" id=<%="review"+books[i].ID%> rows="3"><%=books[i].REVIEW%></textarea>
+
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="rating">
+                                        <input required type="radio" name="rating" value="5" id=<%=books[i].ID+"5"%>>
+                                        <label for=<%=books[i].ID+"5"%>>☆</label>
+                                        <input type="radio" name="rating" value="4" id=<%=books[i].ID+"4"%>>
+                                        <label for=<%=books[i].ID+"4"%>>☆</label>
+                                        <input type="radio" name="rating" value="3" id=<%=books[i].ID+"3"%>>
+                                        <label for=<%=books[i].ID+"3"%>>☆</label>
+                                        <input type="radio" name="rating" value="2" id=<%=books[i].ID+"2"%>>
+                                        <label for=<%=books[i].ID+"2"%>>☆</label>
+                                        <input type="radio" name="rating" value="1" id=<%=books[i].ID+"1"%>>
+                                        <label for=<%=books[i].ID+"1"%>>☆</label>
+                                    </div>
+                                    <button class="btn btn-outline-primary" type="submit">Submit</button>
+                                    <button id=<%= "cancelReviewBtn" + books[i].ID %> class="btn btn-danger ms-5" >Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <hr>
+                    <% } %>
+
+                </div>
+                <div class="tab-pane fade" id="unreviewed">
+
+                    <% for(let i = 0;i < unreviewdBooks.length;i++){ %>
+                    <div class="row p-3">
+                        <div class="col-3">
+                            <img src="<%=unreviewdBooks[i].IMAGE%>" width="130px" height="186px">
+                        </div>
+                        <div class="col-9">
+                           <h5> <%=unreviewdBooks[i].BOOK_NAME%></h5>
+                            <p ><%=unreviewdBooks[i].AUTHOR_NAME%></p>
+                            <a class="btn btn-dark" href=<%="/books/"+unreviewdBooks[i].BOOK_ID%> class="edit-review" >Review</a>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <%}%>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<script>
+
+    let books = <%- JSON.stringify(books) %>;
+    const elements = document.getElementById(`editReviewBtn1`);
+
+    for (let i = 0; i < books.length; i++) {
+        document.getElementById(`editReviewBtn${books[i].ID}`).onclick = (function (a) {
+            return function () {
+                 document.getElementById(`ratings_reviews_form${a}`).classList.toggle('d-none');
+                 document.getElementById(`editReviewBtn${a}`).classList.toggle('d-none');
+            };
+        })(books[i].ID);
+    }
+    for (let i = 0; i < books.length; i++) {
+        document.getElementById(`cancelReviewBtn${books[i].ID}`).onclick = (function (a) {
+            return function () {
+                 document.getElementById(`ratings_reviews_form${a}`).classList.toggle('d-none');
+                 document.getElementById(`editReviewBtn${a}`).classList.toggle('d-none');
+            };
+        })(books[i].ID);
+    }
+</script>

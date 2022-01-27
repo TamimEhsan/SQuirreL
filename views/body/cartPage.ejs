@@ -165,7 +165,7 @@
 
     for (let i = 0; i < items.length; i++) {
         total += items[i].PRICE;
-        document.getElementById(`addBtn${i}`).onclick = (function (a) {
+        document.getElementById(`addBtn${i}`).onclick = (function (i) {
             return function () {
                 total -= items[i].AMOUNT * items[i].PRICE;
                 items[i].AMOUNT = Math.min(items[i].AMOUNT + 1, 5);
@@ -175,7 +175,7 @@
                 updateTotals(total);
             };
         })(i);
-        document.getElementById(`subBtn${i}`).onclick = (function (a) {
+        document.getElementById(`subBtn${i}`).onclick = (function (i) {
             return function () {
                 total -= items[i].AMOUNT * items[i].PRICE;
                 items[i].AMOUNT = Math.max(items[i].AMOUNT - 1, 1);
