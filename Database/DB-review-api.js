@@ -12,6 +12,18 @@ async function insertReview(userId,bookId,star,review){
     await database.execute(sql, binds, database.options);
     return;
 }
+async function editReview(userId,bookId,reviewId,star,review){
+    const sql = `
+        UPDATE RATES
+        SET review = :review, stars = :star
+        WHERE user_id = :userId AND id = :reviewId AND book_id = :bookId
+    `;
+    const binds = {
+        reviewId,userId,bookId,star,review
+    }
+    await database.execute(sql, binds, database.options);
+    return;
+}
 
 async function getAllReviewsByBook(bookId){
     const sql = `
@@ -29,14 +41,46 @@ async function getAllReviewsByBook(bookId){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+
 async function getAllReviewsByUser(userId){
     const sql = `
         SELECT 
-            *
+            rates.*,
+            book.id AS book_id,book.name AS book_name,book.image,
+            author.name AS author_name
         FROM 
             rates
+        JOIN book ON book.id = rates.book_id
+        JOIN author ON author.id = book.author_id
         WHERE 
             user_id = :userId
+        `;
+    const binds = {
+        userId:userId
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+async function getAllUnreviewedBooksByUser(userId){
+    const sql = `
+        ( SELECT UNIQUE
+            book.id AS book_id,book.name AS book_name,book.image,
+            author.name AS author_name
+        FROM BOOK
+        JOIN author on BOOK.AUTHOR_ID = AUTHOR.id
+        JOIN PICKED ON PICKED.BOOK_ID = book.ID
+        JOIN cart ON cart.id = picked.cart_id and cart.user_id = :userId
+        JOIN book_order on book_order.cart_id = cart.id and book_order.state = 5 )
+        MINUS
+        (
+            SELECT
+            book.id AS book_id,book.name AS book_name,book.image,
+            author.name AS author_name
+        FROM
+            rates
+        JOIN book ON book.id = rates.book_id
+        JOIN author ON author.id = book.author_id
+        WHERE
+            user_id = :userId)
         `;
     const binds = {
         userId:userId
@@ -80,8 +124,10 @@ async function hasReviewdBook(userId,bookId){
 }
 module.exports = {
     insertReview,
+    editReview,
     getAllReviewsByBook,
     getAllReviewsByUser,
     hasBookOrdered,
-    hasReviewdBook
+    hasReviewdBook,
+    getAllUnreviewedBooksByUser
 }
