@@ -1,4 +1,6 @@
 # SQuirrel 
-sachin
 
-Tamim er change kora line
+
+### To do list
+- Create Wishlist
+- Delete review

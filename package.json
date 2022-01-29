@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/TamimEhsan/SQuirreL#readme",
   "dependencies": {
+    "@material/textfield": "^13.0.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "bootstrap": "^5.1.3",
