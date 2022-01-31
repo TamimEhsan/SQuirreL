@@ -1,0 +1,14 @@
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src=<%=carousalImages[0]%> class="d-block w-100" alt="...">
+        </div>
+        <% for(let i =1 ;i<carousalImages.length;i++){%>
+            <div class="carousel-item" >
+                <img src=<%= carousalImages[i] %> class="d-block w-100" alt="...">
+            </div>
+        <%}%>
+    </div>
+
+</div>

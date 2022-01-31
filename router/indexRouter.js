@@ -68,6 +68,9 @@ router.get('/', async (req, res) =>{
 });
 
 // setting up sub-routers
+
+
+
 router.use('/signup', signupRouter);
 router.use('/login', loginRouter);
 router.use('/logout', logoutRouter);

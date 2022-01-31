@@ -1,0 +1,221 @@
+<div class="row">
+    <div class=" col-8">
+        <div class="shadow row p-2 m-0 mb-2  justify-content-between">
+            <div class="col-9">
+                <h3>Total: <span id="total-top">432</span> Tk.</h3>
+                <b style="color: #33c24d">You are saving total TK. <span>0</span></b>
+            </div>
+            <div class="col-3">
+                <% if(items.length === 0){ %>
+                    <button class="btn btn-success disabled" onclick="sendItemCountUpdate()">Save Changes</button>
+                <% }else{ %>
+                    <button class="btn btn-success" onclick="sendItemCountUpdate()">Save Changes</button>
+                <% } %>
+
+            </div>
+        </div>
+        <div class="shadow" style="background-color: #fffaf4">
+            <% for(let i = 0;i < items.length;i++){ %>
+                <div class="row p-3 border-bottom">
+                    <div class="col-2">
+                        <img class="img-fluid" src=<%= items[i].IMAGE %>>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-7">
+                                <h5><%= items[i].BOOK_NAME %></h5>
+                                <span> <%= items[i].AUTHOR_NAME %> </span> </br>
+                                <a href=<%= 'cart/delete/' + items[i].BOOK_ID %> style="background-color: white;border:
+                                   black;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                    <path fill-rule="evenodd"
+                                          d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                </svg>
+                                </a>
+                            </div>
+                            <div class="col-2">
+
+                                <div class="row border">
+                                    <button style="width: 26px;height: 26px; border-radius: 0"
+                                            id=<%= 'subBtn' + i %>
+                                            class="bg-light border-end col m-0 p-0 btn js-minus-btn
+                                    " id="btn-minus"
+                                    data-toggle="tooltip" title="" data-type="error"
+                                    data-original-title="Please enter a value greater than or equal to 1">
+                                    <ion-icon name="remove-outline"></ion-icon>
+                                    </button>
+                                    <input type="text" style="width: 40px;height: 26px;"
+                                           id=<%= 'input' + i %>
+
+                                           class="col m-0 p-0 btn img-fluid form-control bg-white shadow-none disabled"
+                                    id="js--productQuantity-217978" value=<%= items[i].AMOUNT %> data-toggle="tooltip"
+                                    data-title=""
+                                    data-type="error" pid="217978" data-original-title="" title="">
+                                    <button style="width: 26px;height: 26px; border-radius: 0"
+                                            id=<%= 'addBtn' + i %>
+                                            class="bg-light border-start col m-0 p-0 btn js-plus-btn
+                                    " id="btn-plus"
+                                    data-toggle="tooltip"
+                                    data-title="Do you want to buy more than 99 copies? Please contact us on
+                                    01708166233?"
+                                    data-type="info" data-original-title="" title="">
+                                    <ion-icon name="add-outline"></ion-icon>
+                                    </button>
+                                </div>
+
+
+                            </div>
+                            <div class="col-3">
+                                <b id=<%= 'price' + i %>>TK: <%= items[i].PRICE %></b>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            <% } %>
+        </div>
+
+        <div class="shadow p-3 mt-3">
+            <span class="m-3">Order as many products as you want together, the shipping charge is only 50 taka</span>
+            <hr>
+            <% if(items.length === 0){ %>
+                <a class="btn btn-danger m-2 disabled" href="/cart/ship">Place Order</a>
+            <% }else{ %>
+                <a class="btn btn-danger m-2" href="/cart/ship">Place Order</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="checkout-sidebar__content">
+
+            <div class="payment-breakdown mt-3">
+                <h4 class="m-3">Checkout Summary</h4>
+                <hr>
+                <div class="payment-breakdown__content">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td class="text-right" id="subtotal">402 TK.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Shipping
+                            </td>
+                            <td class="text-right" id="shipping">50 TK.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td class="text-right" id="total">472 TK.
+                            </td>
+                        </tr>
+
+
+                        <tr class="payment-breakdown__content__table-last-tr" id="payabletr">
+                            <td class="font-weight-bold">Payable Total</td>
+                            <td class="text-right font-weight-bold" id="payable">472 TK.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!--popup-->
+
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Squirrel</strong>
+            <small>Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Successfully Updated your cart!
+        </div>
+    </div>
+
+    <div id="liveToastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Squirrel</strong>
+            <small>Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Something went wrong
+        </div>
+    </div>
+</div>
+
+<script>
+    let total = 0;
+    let items = <%- JSON.stringify(items) %>;
+
+    for (let i = 0; i < items.length; i++) {
+        total += items[i].PRICE;
+        document.getElementById(`addBtn${i}`).onclick = (function (i) {
+            return function () {
+                total -= items[i].AMOUNT * items[i].PRICE;
+                items[i].AMOUNT = Math.min(items[i].AMOUNT + 1, 5);
+                document.getElementById(`input${i}`).value = items[i].AMOUNT;
+                total += items[i].AMOUNT * items[i].PRICE;
+                document.getElementById(`price${i}`).innerText = "TK: " + items[i].AMOUNT * items[i].PRICE;
+                updateTotals(total);
+            };
+        })(i);
+        document.getElementById(`subBtn${i}`).onclick = (function (i) {
+            return function () {
+                total -= items[i].AMOUNT * items[i].PRICE;
+                items[i].AMOUNT = Math.max(items[i].AMOUNT - 1, 1);
+                document.getElementById(`input${i}`).value = items[i].AMOUNT;
+                total += items[i].AMOUNT * items[i].PRICE;
+                document.getElementById(`price${i}`).innerText = "TK: " + items[i].AMOUNT * items[i].PRICE;
+                updateTotals(total);
+            };
+        })(i);
+    }
+
+    function updateTotals(total){
+        document.getElementById('total-top').innerText = total;
+        document.getElementById('subtotal').innerText = total + ' TK.';
+        document.getElementById('total').innerText = (total+50) + ' TK.';
+        document.getElementById('payable').innerText = (total+50) + ' TK.';
+    }
+
+    updateTotals(total);
+
+
+    function sendItemCountUpdate() {
+        $.ajax({
+            url: `/cart/update`,
+            type: 'POST',
+            data: {items: JSON.stringify(items)},
+            statusCode: {
+                200: function () {
+                    var toastLiveExample = document.getElementById('liveToast')
+                    var toast = new bootstrap.Toast(toastLiveExample)
+                    toast.show();
+                },
+                204: function () {
+                    var toastLiveExample = document.getElementById('liveToastError')
+                    var toast = new bootstrap.Toast(toastLiveExample)
+                    toast.show()
+
+                }
+            }
+        });
+    }
+
+</script>

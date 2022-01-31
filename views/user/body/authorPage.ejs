@@ -1,0 +1,26 @@
+<nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/authors">Authors</a></li>
+        <li class="breadcrumb-item active"><%= author.NAME %></li>
+    </ol>
+</nav>
+
+
+<div class="shadow p-2 mt-3">
+<div class="row justify-items-start p-5">
+    <div class="col-2"><img class="circular" src=<%= author.IMAGE %>></div>
+                <div class="col">
+                    <h3><%= author.NAME %></h3>
+                    <div class="pt-2">
+                        <%= author.DESCRIPTION %>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
+<div class="shadow p-2 mt-3">
+    <h3>Books of <%=author.NAME%></h3>
+    <%-include('allBooksPage')%>
+</div>
