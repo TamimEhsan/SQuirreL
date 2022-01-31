@@ -1,0 +1,109 @@
+
+
+<div class="row">
+    <div class="col-3">
+        <div class="shadow mt-3 p-2">
+            <div class="row no-gutters">
+                <div class="col-3">
+                    <img class="circular" src="<%=user.IMAGE%>" width="50">
+                </div>
+                <div class="col-9">
+                    <span>Hello</span>
+                    <h5><%=user.NAME%></h5>
+                </div>
+            </div>
+        </div>
+        <div class="shadow mt-3 p-2">
+            <div class="list-group list-group-flush">
+                <a href="/my-section/profile" class="list-group-item list-group-item-action active" aria-current="true">My Account</a>
+                <a href="/my-section/orders" class="list-group-item list-group-item-action ">My Orders</a>
+                <a href="#" class="list-group-item list-group-item-action">My Lists</a>
+                <a href="#" class="list-group-item list-group-item-action">My Wishlist</a>
+                <a href="/my-section/reviews" class="list-group-item list-group-item-action">My Ratings and Reviews</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="shadow p-3 mt-3 d-flex justify-content-between">
+
+            <h3>Profile</h3>
+            <a class="btn btn-outline-primary ms-2" href="/my-section/profile/edit">Edit Profile</a>
+
+
+        </div>
+        <section class="shadow mt-3 p-3">
+            <h3>Personal Information</h3>
+            <hr>
+            <form action="/my-section/profile" method="post">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="floatingInput">Name</label>
+                            <input disabled required type="text" name="name" value="<%= user.NAME %>" class="form-control"
+                                   id="floatingInput" placeholder="name@example.com">
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="dob" class="form-label pb-1">Your Date of Birth</label>
+                            <input disabled type="date" name="dob" value="<%=user.DOB%>"
+                                   class="form-control personal p-3 date-of-birth">
+                        </div>
+<!--                        <p>Gender</p>-->
+<!--                        <div class="d-flex justify-content-lg-start">-->
+<!--                            <div class="form-check me-3">-->
+<!--                                <input disabled class="form-check-input" type="radio" name="gender" id="flexRadioDefault1"-->
+<!--                                       value="0">-->
+<!--                                <label class="form-check-label" for="flexRadioDefault1">-->
+<!--                                    Male-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                            <div class="form-check">-->
+<!--                                <input disabled class="form-check-input" type="radio" name="gender" id="flexRadioDefault2"-->
+<!--                                       checked value="1">-->
+<!--                                <label class="form-check-label" for="flexRadioDefault2">-->
+<!--                                    Female-->
+<!--                                </label>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                    </div>
+                </div>
+                <hr>
+                <h3>Contact Information</h3>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="floatingInput">Phone Number</label>
+                            <input disabled type="text" name="phone" value="<%= user.PHONE %>" class="form-control"
+                                   id="floatingInput" placeholder="name@example.com">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="floatingInput">Email address</label>
+                            <input disabled type="email" name="email" value="<%=user.EMAIL%>" class="form-control"
+                                   id="floatingInput" placeholder="name@example.com">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h3>Profile Picture</h3>
+                <div class="row ">
+                    <div class="col-2">
+                        <img class="img-fluid circular" src="<%=user.IMAGE%>">
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="floatingInput">Link</label>
+                            <input disabled type="text" name="image" value="<%=user.IMAGE%>" class="form-control"
+                                   id="floatingInput" placeholder="name@example.com">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+            </form>
+        </section>
+    </div>
+</div>
+

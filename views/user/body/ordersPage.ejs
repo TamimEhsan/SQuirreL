@@ -1,0 +1,80 @@
+
+
+<div class="row">
+    <div class="col-3">
+        <div class="shadow mt-3 p-2">
+            <div class="row no-gutters">
+                <div class="col-3">
+                    <img class="circular" src="<%=user.IMAGE%>" width="50">
+                </div>
+                <div class="col-9">
+                    <span>Hello</span>
+                    <h5><%=user.NAME%></h5>
+                </div>
+            </div>
+        </div>
+        <div class="shadow mt-3 p-2">
+            <div class="list-group list-group-flush">
+                <a href="/my-section/profile" class="list-group-item list-group-item-action " aria-current="true">My Account</a>
+                <a href="#" class="list-group-item list-group-item-action active">My Orders</a>
+                <a href="#" class="list-group-item list-group-item-action">My Lists</a>
+                <a href="#" class="list-group-item list-group-item-action">My Wishlist</a>
+                <a href="/my-section/reviews" class="list-group-item list-group-item-action">My Ratings and Reviews</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-9">
+        <section class="shadow mt-3 p-2">
+            <div class=" d-flex justify-content-between align-items-center">
+                <div class="my-order__description">
+                    <h4>My Orders</h4>
+                    <p>Your Total Order: <%=items.length%></p>
+                    <p class="msg"></p>
+                </div>
+
+                <div class="my-orders__heading--sort">
+
+                    <form action="/my-section/orders" method="get" class="d-flex align-items-center justify-content-end  ml-auto">
+                        <span>Status: </span>
+                        <select id="orderStatus" name="orderStatus" class="form-select m-1">
+                            <option value="0" selected="">Select Any</option>
+                            <option value="1">Processing</option>
+                            <option value="2">Approved</option>
+                            <option value="3">On Shipping</option>
+                            <option value="4">Shipped</option>
+                            <option value="5">Completed</option>
+                            <option value="6">Cancelled</option>
+                            <option value="7">Returned</option>
+                        </select>
+
+                        <div class="order-id-btn">
+                            <input type="submit" class="btn btn-warning" value="Submit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <%let statues = ['PROCESSING','APPROVED','ON SHIPPING','SHIPPED','COMPLETED','CANCELLED','RETURNED'];%>
+        <div class="d-flex flex-wrap justify-content-evenly">
+            <%for(let i =0;i<items.length;i++){%>
+            <div class="shadow mt-3 p-3">
+                <h5><b>Your Order Id: <%=items[i].ID%></b></h5>
+                <hr>
+                <span class="btn btn-outline-primary m-2 disabled"><%=statues[ items[i].STATE-1 ]%></span>
+                <a class="btn btn-outline-warning" href=<%='/my-section/orders/track/'+items[i].ID%>>Track Order</a>
+                <hr>
+                <h5>Price: <%=items[i].TOTAL_PRICE%></h5>
+                <hr>
+                <h5>Items: <%=items[i].TOTAL_ITEM%></h5>
+            </div>
+            <%}%>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    document.getElementById('orderStatus').value = '<%=_status%>';
+   // console.log(document.getElementById('orderStatus'));
+</script>

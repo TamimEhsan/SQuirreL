@@ -79,9 +79,26 @@ async function getBooksByPublisherID(ID){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function searchBooks(keyword){
+    const sql = `
+        SELECT
+            B.ID,B.NAME,B.IMAGE,B.STOCK,B.PRICE,A.NAME AS author_name
+        FROM BOOK B
+        JOIN AUTHOR A on B.AUTHOR_ID = A.ID
+        JOIN PUBLISHER P on B.PUBLISHER_ID = P.ID
+        WHERE (( LOWER(B.NAME) LIKE '%'||:keyword||'%') OR ( LOWER(A.NAME) LIKE '%'||:keyword||'%') OR ( LOWER(P.NAME) LIKE '%'||:keyword||'%'))
+    `;
+    const binds = {
+        keyword:keyword
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
+
+}
+
 module.exports = {
     getAllBooks,
     getBookByID,
     getBookByAuthorID,
-    getBooksByPublisherID
+    getBooksByPublisherID,
+    searchBooks
 }

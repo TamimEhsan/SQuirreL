@@ -1,0 +1,91 @@
+<div class=" row p-5 ms-5 me-5 g-0">
+    <div class="col-5 rounded-2">
+        <%- include('components/carousel2',{carousalImages:['images/loginCarousel1.png','images/loginCarousel2.png','images/loginCarousel3.png','images/loginCarousel4.png','images/loginCarousel5.png']}) %>
+    </div>
+    <div class="shadow mt-2 mb-2 col-7 p-3 rounded-2">
+        <ul class="mt-3 nav nav-tabs justify-content-center">
+            <li class="nav-item active">
+                <a href="#" class="nav-link active">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="/signup" class="nav-link">Sign Up</a>
+            </li>
+
+        </ul>
+        <form class="p-4" action="/login" method="POST">
+            <!-- email -->
+            <!--            <div class="form-group row m-2">-->
+            <!--                <label for="handle" class="col-4 col-form-label">Email</label>-->
+            <!--                <div class="col-8">-->
+            <!--                    <input type="text" class="form-control" name="email" required-->
+            <!--                           value="<%= (typeof form != 'undefined') ? form.email : '' %>">-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <!--            &lt;!&ndash; password &ndash;&gt;-->
+            <!--            <div class="form-group row m-2">-->
+            <!--                <label for="password" class="col-4 col-form-label">Password</label>-->
+            <!--                <div class="col-8">-->
+            <!--                    <input type="password" class="form-control" name="password" required-->
+            <!--                           value="<%= (typeof form != 'undefined') ? form.password : '' %>">-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <!--            start-->
+            <div class="form-floating mb-3">
+
+                <input type="text" class="form-control" name="email" required id="floatingInput"
+                       value="<%= (typeof form != 'undefined') ? form.email : '' %>">
+                <!--                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">-->
+                <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating">
+                <input type="password" class="form-control" name="password" required id="floatingPassword"
+                       value="<%= (typeof form != 'undefined') ? form.password : '' %>">
+                <!--                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">-->
+                <label for="floatingPassword">Password</label>
+            </div>
+            <!--            end-->
+
+            <!-- error list -->
+            <% if (errors.length > 0) { %>
+                <div class="row mx-0 pb-0 alert alert-danger">
+                    <ul>
+                        <% for (e of errors) { %>
+                            <li> <%= e %> </li>
+                        <% } %>
+                    </ul>
+                </div>
+            <% } %>
+
+            <div class="row">
+                <div class="col">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input id="rememberme" name="_spring_security_remember_me" class="custom-control-input"
+                               checked="checked" type="checkbox" value="true"><input type="hidden"
+                                                                                     name="__spring_security_remember_me"
+                                                                                     value="on">
+                        <label class="custom-control-label" for="rememberme">
+                            Remember Me
+                        </label>
+                    </div>
+                </div>
+                <div class="col text-right">
+                    <a class="forget-password-link" href="#">Forgot
+                        Password?</a>
+                </div>
+            </div>
+            <!-- submit -->
+            <div class="d-grid gap-2 mt-3 ">
+                <button type="submit" class="btn btn-lg btn-primary" style="background-color: #33c24d;border: 0">Sign
+                    In
+                </button>
+            </div>
+        </form>
+        <div class="d-flex justify-content-around">
+            <p>Don’t have an account?<a class="js--registration-form-btn" href="/signup"><b>Sign Up Now!</b></a>
+            </p>
+        </div>
+    </div>
+</div>
+
+

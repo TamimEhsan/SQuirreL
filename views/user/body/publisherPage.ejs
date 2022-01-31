@@ -1,0 +1,23 @@
+<nav aria-label="breadcrumb" style="--bs-breadcrumb-divider: '>';">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/publishers">Publishers</a></li>
+        <li class="breadcrumb-item active"><%= publisher.NAME %></li>
+    </ol>
+</nav>
+
+
+<div class="shadow p-2 mt-3">
+    <div class="row justify-items-start p-5">
+        <div class="col-2"><img class="circular" src=<%= publisher.IMAGE %>></div>
+        <div class="col">
+            <h3><%= publisher.NAME %></h3>
+        </div>
+    </div>
+
+</div>
+
+<div class="shadow p-2 mt-3">
+    <h3>Books of <%=publisher.NAME%></h3>
+    <%-include('allBooksPage')%>
+</div>

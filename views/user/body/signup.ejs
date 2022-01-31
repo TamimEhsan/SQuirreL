@@ -1,0 +1,84 @@
+<div class=" row p-5 ms-5 me-5 g-0">
+    <div class="col-5 rounded-2">
+        <%- include('components/carousel2',{carousalImages:['images/loginCarousel1.png','images/loginCarousel2.png','images/loginCarousel3.png','images/loginCarousel4.png','images/loginCarousel5.png']}) %>
+    </div>
+    <div class="shadow mt-2 mb-2 col-7 p-3 rounded-2 align-middle">
+        <ul class="mt-3 nav nav-tabs justify-content-center">
+            <li class="nav-item active">
+                <a href="/login" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link active">Sign Up</a>
+            </li>
+
+        </ul>
+
+        <!--    start-->
+
+        <form action="/signup" method="POST" class="card-body">
+            <!-- handle -->
+            <div class="form-floating mb-3">
+
+                <input type="text" class="form-control" name="name" required
+                       value="<%= (typeof form != 'undefined') ? form.name : '' %>">
+                <label for="handle">Name</label>
+
+            </div>
+
+
+
+            <!-- email -->
+            <div class="form-floating mb-3">
+
+                <input type="email" class="form-control" name="email" required
+                       value="<%= (typeof form != 'undefined') ? form.email : '' %>">
+                <label for="email">Email</label>
+
+            </div>
+            <!-- password -->
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="password" required
+                       value="<%= (typeof form != 'undefined') ? form.password : '' %>">
+                <label for="password">Password</label>
+
+            </div>
+            <!-- confirm password -->
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="password2" required
+                       value="<%= (typeof form != 'undefined') ? form.password2 : '' %>">
+                <label for="password2">Confirm Password</label>
+            </div>
+            <!-- Date of Birth -->
+            <!--        <div class="form-group row m-2">-->
+            <!--            <label for="birthdate" class="col-4 col-form-label">Date of Birth</label>-->
+            <!--            <div class="pl-3">-->
+            <!--                <input type="date" class="form-control" name="birthdate" required-->
+            <!--                value="<%= (typeof form != 'undefined') ? form.birthdate : '' %>" >-->
+            <!--            </div>-->
+            <!--        </div>-->
+            <!-- error list -->
+            <% if (errors.length > 0) { %>
+                <div class="row m-2 mx-0 pb-0 alert alert-danger">
+                    <ul>
+                        <% for (e of errors) { %>
+                            <li> <%= e %> </li>
+                        <% } %>
+                    </ul>
+                </div>
+            <% } %>
+            <!-- submit -->
+            <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-lg btn-primary" style="background-color: #33c24d;border: 0">Create
+                    Account
+                </button>
+            </div>
+
+        </form>
+
+        <!--    end-->
+        <div class="d-flex justify-content-around">
+            <p>Already have an account?<a class="js--registration-form-btn" href="/login"><b>Login Now!</b></a>
+            </p>
+        </div>
+    </div>
+</div>

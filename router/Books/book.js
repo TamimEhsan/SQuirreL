@@ -21,6 +21,21 @@ router.get('/', async (req, res) =>{
     });
 });
 
+router.get('/search', async (req, res) =>{
+    // if logged in, delete token from database
+    if(req.user === null){
+        return res.redirect('/login');
+    }
+
+    const booksResult = await DB_book.searchBooks(req.query.keyword);
+    res.render('layout.ejs', {
+        user:req.user,
+        body:['allBooksPage'],
+        title:'Books',
+        navbar:1,
+        books:booksResult
+    });
+});
 router.get('/:bookID', async (req, res) =>{
     // if logged in, delete token from database
     if(req.user === null){

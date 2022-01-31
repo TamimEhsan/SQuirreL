@@ -1,0 +1,100 @@
+<!-- Horizontal Steppers -->
+<div class="shadow mt-3 p-3 bs-stepper">
+    <h4>Your Order Delivery Information</h4><hr>
+    <div class="bs-stepper-header" role="tablist">
+        <!-- your steps here -->
+        <div class="step" data-target="#logins-part">
+            <span class="bs-stepper-circle">1</span>
+            <span class="bs-stepper-label">Processing</span>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#information-part">
+            <span class="bs-stepper-circle">2</span>
+            <span class="bs-stepper-label">Approved</span>
+
+        </div>
+        <div class="line"></div>
+        <div class="step " data-target="#information-part">
+            <span class="bs-stepper-circle">3</span>
+            <span class="bs-stepper-label">On Shipping</span>
+        </div>
+        <div class="line"></div>
+        <div class="step " data-target="#information-part">
+            <span class="bs-stepper-circle">4</span>
+            <span class="bs-stepper-label">Shipped</span>
+
+        </div>
+        <div class="line"></div>
+        <div class="step " data-target="#information-part">
+            <span class="bs-stepper-circle">5</span>
+            <span class="bs-stepper-label">Completed</span>
+
+        </div>
+    </div>
+
+</div>
+<!-- /.Horizontal Steppers -->
+
+
+<div class="row">
+    <div class="col-3">
+        <div class="shadow mt-3 p-3">
+            <h5><b>Delivery To</b></h5>
+            <hr>
+            <b>Name:</b><br/>
+            <span><%= items.NAME %></span>
+            <hr>
+            <b>Phone:</b><br/>
+            <span><%= items.PHONE1 %></span>
+            <hr>
+            <b>Alternative Phone:</b><br/>
+            <span><%= items.PHONE2 %></span>
+        </div>
+        <div class="shadow mt-3 p-3">
+            <h5><b>Delivery Address</b></h5>
+            <hr>
+            <b>Home:</b><br/>
+            <span><%= items.ADDRESS %></span>
+        </div>
+    </div>
+    <div class="col-9">
+        <section class="shadow mt-3 p-2">
+            <h4>Order Summary</h4>
+            <% for(let i = 0;i < books.length;i++){ %>
+            <hr>
+            <div class="row">
+                <div class="col-2">
+                    <img src=<%= books[i].IMAGE %> class="img-fluid"/>
+                </div>
+                <div class="col-4">
+                    <%= books[i].BOOK_NAME %> <br/>
+                    <%= books[i].AUTHOR_NAME %>
+                </div>
+                <div class="col-2">
+                    Price: TK.<%= books[i].PRICE %>
+                </div>
+                <div class="col-2">
+                    Qty:<%= books[i].AMOUNT %>
+                </div>
+                <div class="col-2">
+                    TK.<%= books[i].AMOUNT*books[i].PRICE %>
+                </div>
+            </div>
+
+            <% } %>
+        </section>
+    </div>
+</div>
+
+<script>
+    let step = <%=items.STATE%>
+    step--;
+    var elements = document.querySelectorAll('.step');
+    //console.log(elements.length,step);
+    for(let i=0;i<step;i++){
+        elements[i].classList.add('success');
+       // console.log(elements[i]);
+    }
+    elements[step].classList.add('active');
+
+</script>

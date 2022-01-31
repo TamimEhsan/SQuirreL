@@ -1,0 +1,242 @@
+<script>
+    const totalPrice = <%= cart.price %>;
+
+    function checkVoucher() {
+
+        let voucherName = document.getElementById('coupon-field').value;
+        $.get({
+            url: `/cart/voucher/${voucherName}`,
+            success: function (data, status) {
+                //console.log(data.voucherId);
+                const voucherId = data.voucherId;
+                const discount = data.discount;
+                document.getElementById('voucherId').value = voucherId;
+                document.getElementById('giftvoucher').innerText = Math.floor(totalPrice*discount/100) + ' TK.';
+                document.getElementById('payable').innerText = ( totalPrice +50 -  Math.floor(totalPrice*discount/100) ) + ' TK.';
+                var toastLiveExample = document.getElementById('liveToast')
+                var toast = new bootstrap.Toast(toastLiveExample)
+                toast.show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                document.getElementById('voucherId').value = '';
+                document.getElementById('giftvoucher').innerText = '0 TK.';
+                document.getElementById('payable').innerText = (totalPrice + 50) + ' TK.';
+
+                var toastLiveExample = document.getElementById('liveToastError')
+                var toast = new bootstrap.Toast(toastLiveExample)
+                toast.show();
+            }
+        });
+    }
+</script>
+
+<div class="row mt-3">
+    <div class=" col-8">
+        <div class="content__wrapper">
+
+            <form method="POST" class="js--confirm-order" action="/cart/confirmOrder">
+                <input type="hidden" name="cartId" id="cartId" value=<%= cart.cartId %>>
+                <input type="hidden" name="isGift" id="isGift" value="false">
+                <input type="hidden" name="accountid" id="accountid" value="290331">
+                <input type="hidden" name="voucherId" id="voucherId" value="">
+
+                <input name="productId" type="hidden" value="">
+                <input name="qty" type="hidden" value="">
+                <input type="hidden" name="productOrderType" id="productOrderType" value="">
+
+
+                <div class="shadow mb-3">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-start align-items-center">
+                            <h3 class="card-title mb-0">Shipping Address</h3>
+
+
+                            <p class="card-subtitle">(Please Fill Out Your Information)</p>
+
+                        </div>
+
+                        <!-- old user start -->
+
+                        <!-- old user end -->
+
+                        <!-- new login, guest, request for stock section start-->
+
+
+                        <div class="card-body special-shipping js--special-shipping">
+                            <div class="mb-3">
+                                <span class="m-3"> Pick Up Your Parcel From:</span>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pick"
+                                           id="flexRadioDefault1" value="1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Home
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="pick"
+                                           id="flexRadioDefault2" value="2">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Office
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="shipping-form-container">
+                                <div class="form-floating mb-3">
+                                    <input required name="name" type="text" class="form-control" id="floatingInput"
+                                           placeholder="name@example.com">
+                                    <label for="floatingInput">Name</label>
+                                </div>
+                                <div class="row g-2 mb-3">
+                                    <div class="form-floating col-md">
+                                        <input required name="phone" type="text" class="form-control" id="floatingInput"
+                                               placeholder="name@example.com">
+                                        <label for="floatingInput">Phone Number</label>
+                                    </div>
+                                    <div class="form-floating col-md">
+                                        <input name="phone2" type="text" class="form-control" id="floatingInput"
+                                               placeholder="name@example.com">
+                                        <label for="floatingInput">Alternate Phone Number</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-floating">
+                                    <textarea name="address" required class="form-control"
+                                              placeholder="Leave a comment here"
+                                              id="floatingTextarea2" style="height: 100px"></textarea>
+                                    <label for="floatingTextarea2">Address</label>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <!-- new login, guest, request for stock section end-->
+
+                    </div>
+
+                    <!-- gift form section start -->
+
+                    <!-- gift form section end -->
+
+                </div>
+
+                <div class="shadow">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-start align-items-center">
+                            <h3 class="card-title mb-0">Payment Method</h3>
+                            <p class="card-subtitle">(Please select only one! payment method)</p>
+                        </div>
+
+                        <div class="p-3">
+                            <p class="payment-content"><strong>বি:দ্র:</strong> কিছু কিছু ক্ষেত্রে আপনার অর্ডারে থাকা
+                                বই/পণ্যের মূল্য প্রকাশক/সরবরাহকারীর পক্ষ থেকে বিভিন্ন কারণে পরিবর্তন হতে পারে। এছাড়া
+                                আপনার
+                                অর্ডারের বই/পণ্য প্রকাশক/ সরবরাহকারীর কাছে নাও থাকতে পারে। এই ধরণের অনাকাঙ্ক্ষিত
+                                বিষয়গুলোর
+                                জন্য আমরা দুঃখিত ও ক্ষমাপ্রার্থী।</p>
+
+                            <button class="btn btn-lg btn-warning text-white" type="submit">Confirm Order</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="checkout-sidebar__content">
+
+            <div class="payment-breakdown">
+                <h4 class="m-3">Checkout Summary</h4>
+                <hr>
+                <div class="payment-breakdown__content">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>Subtotal</td>
+                            <td class="text-right" id="subtotal"><%= cart.price %> TK.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Shipping
+                            </td>
+                            <td class="text-right" id="shipping">50 TK.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total</td>
+                            <td class="text-right" id="total"><%= cart.price + 50 %>TK.
+                            </td>
+                        </tr>
+
+                        <tr style="" id="giftvouchertr2">
+                            <td id="giftvouchertext2">Gift Voucher</td>
+                            <td class="text-right" id="giftvoucher">0 TK.
+                            </td>
+                        </tr>
+
+                        <tr class="payment-breakdown__content__table-last-tr" id="payabletr">
+                            <td class="font-weight-bold">Payable Total</td>
+                            <td class="text-right font-weight-bold" id="payable"><%= cart.price + 50 %>TK.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="coupon-section">
+            <div class="card">
+                <div class="card-header js--coupon-header pb-2 pt-2">
+                    <p class="coupon-title">Add Promo code or Gift voucher <i
+                                class="ion-chevron-down ion-chevron-up"></i></p>
+                </div>
+                <div class="card-body js--coupon-body bg-light" style="display: block;">
+
+                    <div class="input-group input-coupon">
+                        <input required type="text"
+                               class="form-control coupon-field" id="coupon-field" data-validation="true"
+                               data-validation-type="coupon">
+
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" onclick="checkVoucher()">
+                                Apply
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--popup-->
+
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Squirrel</strong>
+            <small>Now</small
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Voucher added successfully
+        </div>
+    </div>
+
+    <div id="liveToastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Squirrel</strong>
+            <small>Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Voucher doesn't exist or expired
+        </div>
+    </div>
+</div>
