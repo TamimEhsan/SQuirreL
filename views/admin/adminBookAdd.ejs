@@ -1,0 +1,127 @@
+
+<div class="row m-0">
+    <!--    menue-->
+    <div class="col-2 bg-dark text-white">
+        <div class="bg-dark text-white p-3" style="position:fixed;height: 100%;">
+            <div class="list-group list-group-dark list-group-flush">
+                <a href="/admin" class="list-group-item list-group-item-action text-white bg-dark" aria-current="true">Home</a>
+                <a href="/admin/book" class="list-group-item list-group-item-action rounded">Books</a>
+                <a href="/admin/author" class="list-group-item list-group-item-action text-white bg-dark">Authors</a>
+                <a href="/admin/publisher" class="list-group-item list-group-item-action text-white bg-dark">Publishers</a>
+                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Others</a>
+            </div>
+        </div>
+    </div>
+    <!--    contents-->
+    <div class="col-10 ">
+        <div class="shadow p-3 mb-3 mt-3">
+            <h3>Add Book</h3>
+
+        </div>
+        <div  class="shadow p-3 mb-3 mt-3">
+            <form action="/admin/book/add" method="post">
+
+                <h3>Main Info</h3>
+                <div class="mb-3">
+                    <label for="nameInput">Book Name</label>
+                    <input required type="text" name="name" value="" class="form-control"
+                           id="nameInput" placeholder="Enter the book name...">
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="authorInput">Author Name</label>
+                            <select required class="form-select" name="author_id" aria-label="Default select example">
+                                <option value="">Select Author</option>
+                                <%for(let i=0;i<authors.length;i++){%>
+                                    <option value="<%=authors[i].ID%>"><%=authors[i].NAME%></option>
+                                <%}%>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="publisherInput">Publisher Name</label>
+                            <select required class="form-select" name="publisher_id" aria-label="Default select example">
+                                <option value="">Select Publisher</option>
+                                <%for(let i=0;i<publishers.length;i++){%>
+                                <option value="<%=publishers[i].ID%>"><%=publishers[i].NAME%></option>
+                                <%}%>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h3>Image</h3>
+                <div class="row">
+<!--                    <div class="col-2">-->
+<!--                        <img src="" class="img-fluid"/>-->
+<!--                    </div>-->
+                    <div class="col-8">
+                        <div class="mb-3">
+                            <label for="imageInput">Image Link</label>
+                            <input type="text" name="image" value="" class="form-control"
+                                   id="imageInput" placeholder="Enter the book image link...">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h3>Details</h3>
+                <div class="row ">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="languageInput">Language</label>
+                            <input required type="text" name="language" value="" class="form-control"
+                                   id="languageInput" placeholder="Enter the book language...">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="isbnInput">ISBN</label>
+                            <input required type="text" name="isbn" value="" class="form-control"
+                                   id="isbnInput" placeholder="Enter the book ISBN...">
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="pageInput">Page</label>
+                            <input type="number" name="page" value="" class="form-control"
+                                   id="pageInput" placeholder="Enter the number of page...">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="yearInput">Year</label>
+                            <input type="number" name="year" value="" class="form-control"
+                                   id="yearInput" placeholder="Enter the publishing year...">
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="pageInput">Price</label>
+                            <input required type="number" name="price" value="" class="form-control"
+                                   id="pageInput" placeholder="Enter the book price...">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="pageInput">Edition</label>
+                            <input type="text" name="edition" value="" class="form-control"
+                                   id="pageInput" placeholder="Enter the book edition...">
+                        </div>
+                    </div>
+
+                </div>
+                <hr>
+                <button class="btn btn-danger" type="submit">ADD BOOK</button>
+                <a class="btn btn-secondary" href="/admin/book">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

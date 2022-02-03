@@ -29,11 +29,13 @@
     <title><%= title %></title>
 </head>
 <body>
-<div style="max-width: 1120px" class="container p-0 d-flex flex-column justify-content-between">
+<!--1120px-->
+<div style="max-width: 1320px" class="container p-0 d-flex flex-column justify-content-between">
 
     <% if(page !== 'login'){ %>
         <%- include('admin/navbar') %>
     <% } %>
+<!--        <div class="m-4 p-1"></div>-->
     <!--    body-->
     <%- include('admin/'+page) %>
 

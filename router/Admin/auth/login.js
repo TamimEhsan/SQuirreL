@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
         const errors = [];
         return res.render('adminLayout.ejs', {
             title : 'Login - Squirrel',
-            page : 'login',
+            page : 'adminLogin',
             user : null,
             form: {
                 email: "",
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
         } else {
             res.render('adminLayout.ejs', {
                 title : 'Login - Squirrel',
-                page : 'login',
+                page : 'adminLogin',
                 errors : errors,
                 form: {
                     email: req.body.email,

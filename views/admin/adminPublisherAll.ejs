@@ -1,0 +1,49 @@
+<div class="row m-0">
+    <!--    menue-->
+    <div class="col-2 bg-dark text-white">
+        <div class="bg-dark text-white p-3" style="position:fixed;height: 100%;">
+            <div class="list-group list-group-dark list-group-flush">
+                <a href="/admin" class="list-group-item list-group-item-action text-white bg-dark" aria-current="true">Home</a>
+                <a href="/admin/book" class="list-group-item list-group-item-action text-white bg-dark">Books</a>
+                <a href="/admin/author" class="list-group-item list-group-item-action text-white bg-dark">Authors</a>
+                <a href="/admin/publisher" class="list-group-item list-group-item-action rounded">Publishers</a>
+                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Others</a>
+            </div>
+        </div>
+    </div>
+    <!--    contents-->
+    <div class="col-10 ">
+        <div class="shadow p-3 mb-3 mt-3">
+            <h3>Publisher List</h3>
+            <a href="/admin/publisher/add" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                ADD NEW PUBLISHER
+            </a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(let i = 0;i < books.length ;i++){ %>
+                <tr>
+                    <th scope="row"><%= books[i].ID %></th>
+                    <td><img class="img-thumbnail" width="100px" src="<%= books[i].IMAGE %>"/></td>
+                    <td><%= books[i].NAME %></td>
+                    <td>
+                        <div class="d-grid">
+                            <a class="btn btn-secondary btn-sm mb-1" href=<%="/admin/publisher/edit/"+books[i].ID%>>Update</a><br/>
+                            <a class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
