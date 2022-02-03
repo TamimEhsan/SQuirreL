@@ -1,0 +1,120 @@
+
+<div class="row m-0">
+    <!--    menue-->
+    <div class="col-2 bg-dark text-white">
+        <div class="bg-dark text-white p-3" style="position:fixed;height: 100%;">
+            <div class="list-group list-group-dark list-group-flush">
+                <a href="/admin" class="list-group-item list-group-item-action text-white bg-dark" aria-current="true">Home</a>
+                <a href="/admin/book" class="list-group-item list-group-item-action rounded">Books</a>
+                <a href="/admin/author" class="list-group-item list-group-item-action text-white bg-dark">Authors</a>
+                <a href="/admin/publisher" class="list-group-item list-group-item-action text-white bg-dark">Publishers</a>
+                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Others</a>
+            </div>
+        </div>
+    </div>
+    <!--    contents-->
+    <div class="col-10 ">
+        <div class="shadow p-3 mb-3 mt-3">
+            <h3>Edit Book</h3>
+
+        </div>
+        <div  class="shadow p-3 mb-3 mt-3">
+            <form action="/admin/book/edit" method="post">
+                <input hidden type="text" name="id" value="<%=book.ID%>" class="form-control"
+                       id="nameInput" placeholder="name@example.com">
+                <h3>Main Info</h3>
+                <div class="mb-3">
+                    <label for="nameInput">Book Name</label>
+                    <input disabled type="text" name="name" value="<%=book.NAME%>" class="form-control"
+                           id="nameInput" placeholder="name@example.com">
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="authorInput">Author Name</label>
+                            <input disabled type="text" name="author_name" value="<%=book.AUTHOR_NAME%>" class="form-control"
+                                   id="authorInput" placeholder="name@example.com">
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="publisherInput">Publisher Name</label>
+                            <input disabled type="text" name="publihser_name" value="<%=book.PUBLISHER_NAME%>" class="form-control"
+                                   id="publisherInput" placeholder="name@example.com">
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h3>Image</h3>
+                <div class="row">
+                    <div class="col-2">
+                        <img src="<%=book.IMAGE%>" class="img-fluid"/>
+                    </div>
+                    <div class="col-8">
+                        <div class="mb-3">
+                            <label for="imageInput">Image Link</label>
+                            <input type="text" name="image" value="<%=book.IMAGE%>" class="form-control"
+                                   id="imageInput" placeholder="name@example.com">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h3>Details</h3>
+                <div class="row ">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="languageInput">Language</label>
+                            <input disabled type="text" name="language" value="<%=book.LANGUAGE%>" class="form-control"
+                                   id="languageInput" placeholder="name@example.com">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="isbnInput">ISBN</label>
+                            <input disabled type="text" name="isbn" value="<%=book.ISBN%>" class="form-control"
+                                   id="isbnInput" placeholder="name@example.com">
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="pageInput">Page</label>
+                            <input type="number" name="page" value="<%=book.PAGE%>" class="form-control"
+                                   id="pageInput" placeholder="name@example.com">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="yearInput">Year</label>
+                            <input type="number" name="year" value="<%=book.PUBLISHING_YEAR%>" class="form-control"
+                                   id="yearInput" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="pageInput">Price</label>
+                            <input type="number" name="price" value="<%=book.PRICE%>" class="form-control"
+                                   id="pageInput" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="pageInput">Edition</label>
+                            <input type="text" name="edition" value="<%=book.EDITION%>" class="form-control"
+                                   id="pageInput" placeholder="">
+                        </div>
+                    </div>
+
+                </div>
+                <hr>
+                <button class="btn btn-danger" type="submit">SAVE BOOK</button>
+                <a class="btn btn-secondary" href="/admin/book">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

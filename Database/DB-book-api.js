@@ -95,10 +95,41 @@ async function searchBooks(keyword){
 
 }
 
+async function editBook(id,image,page,year,price,edition){
+    const sql = `
+        UPDATE BOOK
+        SET image = :image, page = :page, publishing_year = :year, price = :price, edition = :edition
+        WHERE id = :id
+    `
+    const binds = {
+        id:id,
+        image:image,
+        page:page,
+        year:year,
+        price:price,
+        edition:edition
+    }
+    await database.execute(sql, binds, database.options);
+    return ;
+}
+async function addBook(name,author_id,pub_id,image,language,isbn,page,year,price,edition){
+    const sql = `
+        INSERT INTO book(author_id,publisher_id,publishing_year,price,language,image,name,isbn,page,edition)
+        VALUES(:author_id,:pub_id,:year,:price,:language,:image,:name,:isbn,:page,:edition)
+    `;
+    const binds = {
+        name,author_id,pub_id,image,language,isbn,page,year,price,edition
+    }
+    await database.execute(sql, binds, database.options);
+    return ;
+}
+
 module.exports = {
     getAllBooks,
     getBookByID,
     getBookByAuthorID,
     getBooksByPublisherID,
-    searchBooks
+    searchBooks,
+    editBook,
+    addBook
 }
