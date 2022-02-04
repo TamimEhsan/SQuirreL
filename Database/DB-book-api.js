@@ -8,6 +8,7 @@ async function getAllBooks(){
             *
         FROM 
             Book
+        FETCH FIRST 100 ROWS ONLY
         `;
     const binds = {}
     return (await database.execute(sql, binds, database.options)).rows;
