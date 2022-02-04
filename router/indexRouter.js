@@ -24,6 +24,7 @@ const cartRouter = require('./Cart/cart');
 const orderRouter = require('./My-Section/orders');
 const profileRouter = require('./My-Section/profile');
 const myreviewRouter = require('./My-Section/reviews');
+const mywishListRouter = require('./My-Section/wishlist');
 
 /*const userRouter = require('./users/users.js');
 const profileRouter = require('./profile/profile');
@@ -86,6 +87,7 @@ router.use('/cart', cartRouter);
 router.use('/my-section/orders', orderRouter);
 router.use('/my-section/profile', profileRouter);
 router.use('/my-section/reviews', myreviewRouter);
+router.use('/my-section/wishlist', mywishListRouter);
 
 /*router.use('/users', userRouter);
 router.use('/profile', profileRouter);
