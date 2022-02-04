@@ -184,3 +184,11 @@ alter table APP_USER
     add PHONE varchar2(20)
     add DOB varchar2(20)
 	add IMAGE VARCHAR2(1000) default '/images/no-profile-picture.jpg';
+
+CREATE TABLE WISH_LIST(
+	user_id INTEGER NOT NULL,
+	book_id INTEGER NOT NULL,
+	CONSTRAINT WISH_LIST_PK PRIMARY KEY(user_id,book_id),
+	CONSTRAINT WISH_LIST_USER_FK FOREIGN KEY(user_id) REFERENCES APP_USER(ID) ,
+	CONSTRAINT WISH_LIST_BOOK_FK FOREIGN KEY(book_id) REFERENCES BOOK(ID)
+);
