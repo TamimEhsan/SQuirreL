@@ -27,7 +27,33 @@ router.get('/', async (req, res) =>{
         currentPage:offsetPage,
         pages:Math.ceil(booksCount/limits),
         cnt:booksCount,
-        target:'/admin/book?&page='
+        target:'/admin/book?page='
+    });
+});
+
+router.get('/search', async (req, res) =>{
+    // if logged in, delete token from database
+    if( req.admin == null )
+        return res.redirect('/admin/login');
+
+
+    const {keyword} = req.query;
+    let limits = 50;
+    let offsetPage = 1;
+    if( req.query.page ) offsetPage = req.query.page;
+    let offset = (offsetPage-1)*limits;
+    const booksResult = await DB_book.searchBooks(keyword,offset,limits);
+    const booksCountResult = await DB_book.searchBooksCount(keyword);
+    const booksCount = booksCountResult[0].CNT;
+    res.render('adminLayout.ejs', {
+        title:'home',
+        page:'adminBookAll',
+        books:booksResult,
+        start:offset,
+        currentPage:offsetPage,
+        pages:Math.ceil(booksCount/limits),
+        cnt:booksCount,
+        target:'/admin/book/search?keyword='+keyword+'&page='
     });
 });
 

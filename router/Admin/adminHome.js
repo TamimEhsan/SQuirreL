@@ -1,6 +1,7 @@
 // libraries
 const express = require('express');
-const DB_book = require('../../Database/DB-book-api');
+const DB_admin_stats = require('../../Database/DB-admin-stats-api');
+
 
 // creating router
 const router = express.Router({mergeParams : true});
@@ -9,11 +10,19 @@ router.get('/', async (req, res) =>{
 
     if( req.admin == null )
         return res.redirect('/admin/login');
-    const booksResult = await DB_book.getAllBooks();
+
+    const monthlyStatsResult = await DB_admin_stats.getMonthlyStats();
+    const yearlyStatsResult = await DB_admin_stats.getYearlyStats();
+    const monthlyEarningsResult = await DB_admin_stats.getLastMonthEarnings();
+    const yearlyEarningsResult = await DB_admin_stats.getLastYearEarnings();
+
     res.render('adminLayout.ejs', {
         title:'home',
         page:'adminHome',
-        books:booksResult
+        monthlyStat:monthlyStatsResult[0],
+        yearlyStat:yearlyStatsResult[0],
+        monthlyEarnings:monthlyEarningsResult,
+        yearlyEarnings:yearlyEarningsResult
     });
 
 });
