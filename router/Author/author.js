@@ -25,8 +25,16 @@ router.get('/:authorID', async (req, res) =>{
     if(req.user === null){
         return res.redirect('/login');
     }
+
+    let limits = 25;
+    let offsetPage = 1;
+    if( req.query.page ) offsetPage = req.query.page;
+    let offset = (offsetPage-1)*limits;
+    const booksCountResult = await DB_book.getBookByAuthorIDCount(req.params.authorID);
+    const booksCount = booksCountResult[0].CNT;
+
     const authorResult = await DB_author.getAuthorByID(req.params.authorID);
-    const authorBookResult = await DB_book.getBookByAuthorID(req.params.authorID);
+    const authorBookResult = await DB_book.getBookByAuthorID(req.params.authorID,offset,limits);
     if( authorResult.length === 0 )
         return res.redirect('/authors');
     res.render('layout.ejs', {
@@ -35,7 +43,12 @@ router.get('/:authorID', async (req, res) =>{
         title:'Author',
         navbar:2,
         author:authorResult[0],
-        books:authorBookResult
+        books:authorBookResult,
+        start:offset,
+        page:offsetPage,
+        pages:Math.ceil(booksCount/limits),
+        cnt:booksCount,
+        target:'/authors/'+req.params.authorID+'&page='
     });
 });
 

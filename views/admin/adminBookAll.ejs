@@ -21,6 +21,7 @@
                 ADD NEW BOOK
             </a>
         </div>
+        <h6>(Showing <%=start+1%> to <%=start+books.length%> of <%=cnt%> books)</h6>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -67,5 +68,8 @@
 
             </tbody>
         </table>
+        <div style="margin: auto" id="paginationDiv" data-pages=<%=pages%> data-page=<%=currentPage%>
+             data-href=<%=target%>  ></div>
+        <script async src="/scripts/pagination.js"></script>
     </div>
 </div>

@@ -21,7 +21,7 @@ router.get('/', async (req, res) =>{
     let orderItems;
 
     if( status == 0 || status>7 )
-        orderItems = await DB_Order.getAllOrder(userId);
+        orderItems = await DB_Order.getAllOrderByUserId(userId);
     else
         orderItems = await DB_Order.getAllOrderByStatus(userId,status);
 

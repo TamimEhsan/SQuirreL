@@ -30,7 +30,6 @@ router.get('/edit', async (req, res) =>{
         return res.redirect('/login');
     }
     const userId = req.user.id;
-
     const profileResult = await DB_profile.getProfile(userId);
     res.render('layout.ejs', {
         user:req.user,
