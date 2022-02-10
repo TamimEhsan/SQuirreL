@@ -18,6 +18,7 @@ const logoutRouter = require('./Admin/auth/logout');
 const bookRouter = require('./Admin/adminBooks/adminBook');
 const authorRouter = require('./Admin/adminAuthor/adminAuthor');
 const publisherRouter = require('./Admin/adminPublisher/adminPublisher');
+const orderRouter = require('./Admin/adminOrder/adminOrder');
 // ROUTE: home page
 router.get('/', require('./Admin/adminHome'));
 
@@ -27,6 +28,7 @@ router.use('/logout', logoutRouter);
 router.use('/book', bookRouter);
 router.use('/author', authorRouter);
 router.use('/publisher', publisherRouter);
+router.use('/order', orderRouter);
 
 
 

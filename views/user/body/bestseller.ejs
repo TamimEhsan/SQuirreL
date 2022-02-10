@@ -1,0 +1,10 @@
+
+
+<div class="shadow p-3 mt-3">
+    <% for(let i=0;i<books.length;i++){ %>
+        <h5> <%= books[i].NAME %> </h5>
+        <span>Price:<%=books[i].PRICE%></span><br/>
+        <a href=<%="/books/"+books[i].ID%> class="btn btn-outline-primary">VIEW BOOK</a>
+        <hr>
+    <%}%>
+</div>

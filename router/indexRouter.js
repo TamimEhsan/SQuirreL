@@ -16,6 +16,7 @@ const logoutRouter = require('./auth/logout');
 const bookRouter = require('./Books/book');
 const authorRouter = require('./Author/author');
 const publisherRouter = require('./Publisher/publisher');
+const bestsellerRouter = require('./Bestseller/bestseller');
 
 const reviewRouter = require('./Books/reviews');
 
@@ -79,6 +80,7 @@ router.use('/logout', logoutRouter);
 router.use('/books', bookRouter);
 router.use('/authors', authorRouter);
 router.use('/publishers', publisherRouter);
+router.use('/bestseller',bestsellerRouter);
 
 router.use('/reviews', reviewRouter);
 

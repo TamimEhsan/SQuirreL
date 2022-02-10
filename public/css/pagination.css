@@ -1,0 +1,37 @@
+
+a:hover {
+    cursor: pointer;
+}
+#pagination {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+ul li {
+    color: #fff;
+    display: flex;
+}
+ul li a {
+    background-color: #444b6e;
+    padding: 5px 10px;
+    border: 2px solid #3d315b;
+    border-right: 0;
+}
+ul li.active a {
+    background-color: #9ab87a;
+}
+ul li:first-child a {
+    border-radius: 5px 0 0 5px;
+}
+ul li:last-child a {
+    border-radius: 0 5px 5px 0;
+    border-right: 2px solid #3d315b;
+}

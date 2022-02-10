@@ -12,13 +12,24 @@ router.get('/', async (req, res) =>{
     if(req.user === null){
         return res.redirect('/login');
     }
-    const booksResult = await DB_book.getAllBooks();
+    let limits = 25;
+    let offsetPage = 1;
+    if( req.query.page ) offsetPage = req.query.page;
+    let offset = (offsetPage-1)*limits;
+    const booksResult = await DB_book.getAllBooks(offset,limits);
+    const booksCountResult = await DB_book.getAllBooksCount();
+    const booksCount = booksCountResult[0].CNT;
     res.render('layout.ejs', {
         user:req.user,
         body:['allBooksPage'],
         title:'Books',
         navbar:1,
-        books:booksResult
+        books:booksResult,
+        start:offset,
+        page:offsetPage,
+        pages:Math.ceil(booksCount/limits),
+        cnt:booksCount,
+        target:"/books?page="
     });
 });
 
@@ -28,13 +39,24 @@ router.get('/search', async (req, res) =>{
         return res.redirect('/login');
     }
 
-    const booksResult = await DB_book.searchBooks(req.query.keyword);
+    let limits = 25;
+    let offsetPage = 1;
+    if( req.query.page ) offsetPage = req.query.page;
+    let offset = (offsetPage-1)*limits;
+    const booksCountResult = await DB_book.searchBooksCount(req.query.keyword);
+    const booksCount = booksCountResult[0].CNT;
+    const booksResult = await DB_book.searchBooks(req.query.keyword,offset,limits);
     res.render('layout.ejs', {
         user:req.user,
         body:['allBooksPage'],
         title:'Books',
         navbar:1,
-        books:booksResult
+        books:booksResult,
+        start:offset,
+        page:offsetPage,
+        pages:Math.ceil(booksCount/limits),
+        cnt:booksCount,
+        target:'/books/search?keyword='+req.query.keyword+'&page='
     });
 });
 router.get('/:bookID', async (req, res) =>{

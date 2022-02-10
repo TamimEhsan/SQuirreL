@@ -1,0 +1,68 @@
+
+<div class="row m-0">
+    <!--    menue-->
+    <div class="col-2 bg-dark text-white">
+        <div class="bg-dark text-white p-3" style="position:fixed;height: 100%;">
+            <div class="list-group list-group-dark list-group-flush">
+                <a href="/admin" class="list-group-item list-group-item-action text-white bg-dark" aria-current="true">Home</a>
+                <a href="/admin/book" class="list-group-item list-group-item-action text-white bg-dark">Books</a>
+                <a href="/admin/author" class="list-group-item list-group-item-action text-white bg-dark">Authors</a>
+                <a href="/admin/publisher"
+                   class="list-group-item list-group-item-action text-white bg-dark">Publishers</a>
+                <a href="#" class="list-group-item list-group-item-action rounded">Orders</a>
+            </div>
+        </div>
+    </div>
+    <!--    contents-->
+    <div class="col-10 ">
+        <div class="shadow p-3 mb-3 mt-3">
+            <h3>Orders List</h3>
+        </div>
+        <div class="shadow p-3 mb-3 mt-3">
+            <div class="row">
+                <div class="col-1"> ID</div>
+                <div class="col-3"> Name</div>
+                <div class="col-2"> Total Price</div>
+                <div class="col-2"> Total Item</div>
+                <div class="col-2"> State</div>
+                <div class="col-2"> Submit</div>
+            </div>
+            <hr>
+            <% for(let i = 0;i < orders.length;i++){ %>
+                <form action="/admin/order/update" method="post">
+                    <input hidden name="orderId" value="<%=orders[i].ID%>"/>
+                    <div class="row">
+                        <div class="col-1"> <%= orders[i].ID %></div>
+                        <div class="col-3"> <%= orders[i].NAME %></div>
+                        <div class="col-2"> <%= orders[i].TOTAL_PRICE %></div>
+                        <div class="col-1"> <%= orders[i].TOTAL_ITEM %></div>
+                        <div class="col-3">
+                            <select id=<%='select'+i%>  name="orderStatus" class="form-select m-1">
+                                <option value="1">Processing</option>
+                                <option value="2">Approved</option>
+                                <option value="3">On Shipping</option>
+                                <option value="4">Shipped</option>
+                                <option value="5">Completed</option>
+                                <option value="6">Cancelled</option>
+                                <option value="7">Returned</option>
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<script>
+    let orders = <%- JSON.stringify(orders) %>;
+    for(let i=0;i<orders.length;i++){
+        document.getElementById('select'+i).value = orders[i].STATE;
+    }
+
+    // console.log(document.getElementById('orderStatus'));
+</script>
