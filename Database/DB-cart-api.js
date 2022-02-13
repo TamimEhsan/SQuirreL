@@ -173,12 +173,12 @@ async function getTotalPrice(cartId){
 }
 async function getTotalPriceAndItem(cartId){
     const sql = `
-        SELECT SUM(price) AS PRICE, SUM(AMOUNT) AS ITEM FROM picked
+        SELECT SUM(price*AMOUNT) AS PRICE, SUM(AMOUNT) AS ITEM FROM picked
         JOIN book ON picked.book_id = book.id
         WHERE cart_id = :cartId
     `;
     const binds = {
-        cartId:cartId,
+        cartId:cartId
     }
 
     return (await database.execute(sql, binds, database.options)).rows;

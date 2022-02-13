@@ -16,7 +16,7 @@ async function createOrderFromCart(cartId,voucherId,total_price,total_item,name,
 async function getAllOrderByUserId(userId){
     const sql = `
         SELECT 
-            *
+            BOOK_ORDER.*
         FROM 
             book_order
         JOIN cart ON cart.id = book_order.cart_id and cart.user_id = :userId
@@ -30,7 +30,7 @@ async function getAllOrderByUserId(userId){
 async function getAllOrderByStatus(userId,status){
     const sql = `
         SELECT 
-            *
+            BOOK_ORDER.*
         FROM 
             book_order
         JOIN cart ON cart.id = book_order.cart_id and cart.user_id = :userId
@@ -47,7 +47,7 @@ async function getAllOrderByStatus(userId,status){
 async function getOrderById(userId,orderId){
     const sql = `
         SELECT 
-            *
+           BOOK_ORDER.*
         FROM 
             book_order
         JOIN cart ON cart.id = book_order.cart_id and cart.user_id = :userId
@@ -59,7 +59,21 @@ async function getOrderById(userId,orderId){
     }
     return (await database.execute(sql, binds, database.options)).rows;
 }
-
+async function getOrderByCartId(userId,cartId){
+    const sql = `
+        SELECT 
+           BOOK_ORDER.*
+        FROM 
+            book_order
+        JOIN cart ON cart.id = book_order.cart_id and cart.user_id = :userId
+        WHERE book_order.cart_id = :cartId
+        `;
+    const binds = {
+        userId:userId,
+        cartId:cartId
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
+}
 async function getAllUncompleteOrder(){
     const sql = `
         SELECT 
@@ -94,5 +108,6 @@ module.exports = {
     getOrderById,
     getAllOrderByStatus,
     getAllUncompleteOrder,
-    updateOrderState
+    updateOrderState,
+    getOrderByCartId
 }

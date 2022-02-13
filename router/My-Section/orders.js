@@ -41,12 +41,12 @@ router.get('/track/:id', async (req, res) =>{
         return res.redirect('/login');
     }
     const userId = req.user.id;
-    console.log(userId,req.params);
+    // console.log(userId,req.params);
     const orderItems = await DB_Order.getOrderById(userId,req.params.id);
     console.log(orderItems);
 
     const books = await DB_cart.getItemsInCartByCartId(userId,orderItems[0].CART_ID);
-
+    console.log(req.params.id);
     res.render('layout.ejs', {
         user:req.user,
         body:['orderPage'],
