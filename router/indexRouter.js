@@ -3,11 +3,7 @@ const express = require('express');
 //const marked = require('marked');
 
 const router = express.Router({mergeParams : true});
-
-//const DB_blog = require("../DB-codes/DB-blog-api");
-
-//const blogUtils = require("../utils/blog-utils"); //require(process.env.ROOT + '/utils/blog-utils');
-
+const DB_stats = require('../Database/DB-userSite-stats-api');
 // sub-routers
 const signupRouter = require('./auth/signup');
 const loginRouter = require('./auth/login');
@@ -27,51 +23,41 @@ const profileRouter = require('./My-Section/profile');
 const myreviewRouter = require('./My-Section/reviews');
 const mywishListRouter = require('./My-Section/wishlist');
 
-/*const userRouter = require('./users/users.js');
-const profileRouter = require('./profile/profile');
-const blogRouter = require('./blog/blog');
-const countryRouter = require('./country/countryAll');
-const contestRouter = require('./contest/contest');
-const problemsRouter = require('./problems/problems');
-const apiRouter = require('./api/api');
-const teamsRouter = require('./teams/teams');
-const aboutRouter = require('./about/about');
-*/
-//const rightPanelUtils = require('../utils/rightPanel-utils');
+
 
 // ROUTE: home page
 router.get('/', async (req, res) =>{
     if( req.user == null )
         return res.redirect('/login');
-    console.log(req.user);
+
+    const mostReviewedBooks = await DB_stats.getMostReviewedBooksByMonth();
+    const mostSoldBooks = await DB_stats.getMostSoldBooksOfLastMonth();
+    const authorsWithMostSoldBooks = await DB_stats.getAuhtorsWithMostSoldBooksByMonth();
+    const recentlySoldBooks = await DB_stats.getRecentlySoldBooks();
+    console.log('aaaaaaaaaaaa');
+    const topBooksOfJafor = await DB_stats.getTopSoldBooksByAuthor(3853);
+    const topBooksOfHumayun = await DB_stats.getTopSoldBooksByAuthor(3861);
+    const topBooksOfRowling = await DB_stats.getTopSoldBooksByAuthor(22);
+    console.log('bbbbbbbbbbbb');
     res.render('layout.ejs', {
         user:req.user,
         body:['landingPage'],
         title:'Squirrel',
-        publishers:["dfsdf","sfsdf","fsdfsd"]
+        publishers:["dfsdf","sfsdf","fsdfsd"],
+
+        mostReviewedBooks:mostReviewedBooks,
+        mostSoldBooks:mostSoldBooks,
+        recentlySoldBooks:recentlySoldBooks,
+        topBooksOfJafor:topBooksOfJafor,
+        topBooksOfHumayun:topBooksOfHumayun,
+        topBooksOfRowling:topBooksOfRowling
     });
-    /*const id = (req.user === null)? null : req.user.id;
-    const blogs = await DB_blog.getAdminBlogs(id);
 
-    for(let i = 0; i<blogs.length; i++){
-        await blogUtils.blogProcess(blogs[i]);
-        blogs[i].BODY = marked(blogs[i].BODY);
-    }
-
-    let rightPanel = await rightPanelUtils.getRightPanel(req.user);
-
-    res.render('layout.ejs', {
-        title: 'ForceCodes', 
-        body : ['panel-view', 'blog'],
-        user: req.user,
-        blogs : blogs,
-        rightPanel : rightPanel
-    });*/
 });
 
+
+
 // setting up sub-routers
-
-
 
 router.use('/signup', signupRouter);
 router.use('/login', loginRouter);
@@ -91,15 +77,6 @@ router.use('/my-section/profile', profileRouter);
 router.use('/my-section/reviews', myreviewRouter);
 router.use('/my-section/wishlist', mywishListRouter);
 
-/*router.use('/users', userRouter);
-router.use('/profile', profileRouter);
-router.use('/blog', blogRouter);
-router.use('/country', countryRouter);
-router.use('/contest', contestRouter);
-router.use('/api', apiRouter);
-router.use('/problems', problemsRouter);
-router.use('/team', teamsRouter);
-router.use('/about', aboutRouter);
-*/
+
 
 module.exports = router;

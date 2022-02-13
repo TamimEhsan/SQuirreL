@@ -1,13 +1,15 @@
+
 <div class="container-fluid overflow-scroll my-scrollbar">
     <div class="row flex-nowrap">
-        <%for(let i=0;i<10;i++){%>
+        <%for(let i=0;i<books.length;i++){%>
             <div class="col">
-                <div class="card" style="width: 12rem;">
-                    <img class="card-img-top p-3" src="https://images-na.ssl-images-amazon.com/images/I/910ityjoncL.jpg"  alt="Card image cap">
+                <div class="card " style="width: 12rem;">
+                    <img class="card-img-top p-3" src="<%=books[i].IMAGE%>"  alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text .</p>
-                        <a href="#" class="btn btn-dark">View</a>
+                        <h5 class="card-title"><%=books[i].BOOK_NAME%></h5>
+                        <b class="card-title"><%=books[i].AUTHOR_NAME%></b>
+                        <h6 class="card-title">Price: TK. <%=books[i].PRICE%></h6>
+                        <a href=<%="/books/"+books[i].BOOK_ID%> class="btn btn-dark">View</a>
                     </div>
                 </div>
             </div>

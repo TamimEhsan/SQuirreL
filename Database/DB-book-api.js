@@ -170,7 +170,18 @@ async function addBook(name,author_id,pub_id,image,language,isbn,page,year,price
     await database.execute(sql, binds, database.options);
     return ;
 }
-
+async function getNewBooks(){
+    const sql = `
+        SELECT 
+            *
+        FROM 
+            Book
+        ORDER BY ID DESC
+        FETCH FIRST 10 ROWS ONLY
+    `;
+    const binds = {}
+    return (await database.execute(sql, binds, database.options)).rows;
+}
 module.exports = {
     getAllBooks,
     getAllBooksCount,
@@ -181,5 +192,6 @@ module.exports = {
     searchBooks,
     searchBooksCount,
     editBook,
-    addBook
+    addBook,
+    getNewBooks
 }
