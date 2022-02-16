@@ -16,22 +16,9 @@ router.post('/update', async (req,res) =>{
     return res.sendStatus(200);
 });
 router.post('/confirmOrder', async (req,res) =>{
-
     const userId = req.user.id;
-    const cartIdResult = await DB_cart.getAssignedCart(userId)
-    const cartId = cartIdResult[0].CART_ID;
-
-    const priceResult = await DB_cart.getTotalPriceAndItem(cartId);
-    console.log(priceResult);
-    if(priceResult[0].ITEM === 0 || cartId !== (req.body.cartId-0) ){
-        // do something
-        console.log("was here")
-        return res.redirect('/cart');
-    }
     const {voucherId,name,phone,phone2,address,pick} = req.body;
-    await DB_Order.createOrderFromCart(cartId,voucherId,priceResult[0].PRICE,priceResult[0].ITEM,name,phone,phone2,address,pick);  //cartId,voucherId,total_price,total_item,name,phone1,phone2,address,pick
-    await DB_cart.addNewCart(userId);
-
+    await DB_Order.createOrderFromCart(userId,voucherId,name,phone,phone2,address,pick);  //cartId,voucherId,total_price,total_item,name,phone1,phone2,address,pick
     return res.redirect('/my-section/orders');
 });
 router.post('/:bookID', async (req, res) =>{
@@ -82,7 +69,7 @@ router.get('/delete/:bookID', async (req,res) =>{
 router.get('/voucher/:voucherName', async (req,res) =>{
     const voucherResult = await DB_voucher.getVoucherByName(req.params.voucherName);
     if( voucherResult.length === 0 ) return res.sendStatus(404);
-    return res.status(200).send({voucherId:voucherResult[0].ID,discount:voucherResult[0].DISCOUNT});
+    return res.status(200).send({voucherId:voucherResult[0].ID,discount:voucherResult[0].DISCOUNT,cap:voucherResult[0].CAP});
 });
 
 router.get('/ship', async (req,res) =>{

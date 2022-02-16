@@ -1,5 +1,5 @@
 -- 1
-CREATE TABLE author (
+create TABLE author (
     ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     Name        VARCHAR2(100),
     password    VARCHAR2(1024),
@@ -7,14 +7,14 @@ CREATE TABLE author (
 );
 
 -- 2
-CREATE TABLE  genre (
+create TABLE  genre (
     ID         NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     type       VARCHAR2(50),
     CONSTRAINT genre_pk PRIMARY KEY(ID)
 );
 
 -- 3
-CREATE TABLE publisher(
+create TABLE publisher(
     ID              NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     name            VARCHAR2(100) NOT NULL,
     founding_date   DATE,
@@ -22,7 +22,7 @@ CREATE TABLE publisher(
 );
 
 -- 4
-CREATE TABLE voucher (
+create TABLE voucher (
     ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     name        VARCHAR2(100) NOT NULL ,
     discount    NUMBER NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE voucher (
 );
 
 -- 5
-CREATE TABLE app_user (
+create TABLE app_user (
     ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     Name        VARCHAR2(100) NOT NULL ,
     password    VARCHAR2(1024) NOT NULL ,
@@ -40,7 +40,7 @@ CREATE TABLE app_user (
 );
 
 -- 6
-CREATE TABLE book(
+create TABLE book(
     ID                  NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     author_id           NUMBER,
     publisher_id        NUMBER,
@@ -54,7 +54,7 @@ CREATE TABLE book(
 );
 
 -- 7
-CREATE TABLE cart (
+create TABLE cart (
     ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     user_id     NUMBER,
     created_at  DATE DEFAULT SYSDATE,
@@ -63,7 +63,7 @@ CREATE TABLE cart (
 );
 
 -- 8
-CREATE TABLE award (
+create TABLE award (
     ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     name        VARCHAR2(100) NOT NULL ,
     provider    VARCHAR2(100),
@@ -71,7 +71,7 @@ CREATE TABLE award (
 );
 
 -- 9
-CREATE TABLE book_order (
+create TABLE book_order (
     ID              NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     cart_id         NUMBER,
     voucher_id      NUMBER,
@@ -86,7 +86,7 @@ CREATE TABLE book_order (
 );
 
 -- 10
-CREATE TABLE rates(
+create TABLE rates(
     ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     user_id     NUMBER,
     book_id     NUMBER,
@@ -98,7 +98,7 @@ CREATE TABLE rates(
 );
 
 -- 11
-CREATE TABLE comments(
+create TABLE comments(
     ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     user_id     NUMBER,
     book_id     NUMBER,
@@ -110,7 +110,7 @@ CREATE TABLE comments(
 );
 
 -- 12
-CREATE TABLE picked
+create TABLE picked
 (
     ID         NUMBER GENERATED ALWAYS as IDENTITY (START with 1 INCREMENT by 1),
     cart_id    NUMBER,
@@ -122,7 +122,7 @@ CREATE TABLE picked
 );
 
 -- 13
-CREATE TABLE awarded(
+create TABLE awarded(
     ID          NUMBER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) ,
     award_id    NUMBER,
     book_id     NUMBER,
@@ -185,7 +185,7 @@ alter table APP_USER
     add DOB varchar2(20)
 	add IMAGE VARCHAR2(1000) default '/images/no-profile-picture.jpg';
 
-CREATE TABLE WISH_LIST(
+create TABLE WISH_LIST(
 	user_id INTEGER NOT NULL,
 	book_id INTEGER NOT NULL,
 	CONSTRAINT WISH_LIST_PK PRIMARY KEY(user_id,book_id),
@@ -195,10 +195,17 @@ CREATE TABLE WISH_LIST(
 
 alter table PUBLISHER
 	add FID VARCHAR2(50);
+
 alter table AUTHOR
 	add FID VARCHAR2(50);
+
 alter table BOOK
 	add SUMMARY VARCHAR2(3000);
 
+alter table BOOK
+    add STAR NUMBER default 0
+    add REVIEW_COUNT NUMBER default 0;
 
+alter table VOUCHER
+	add CAP NUMBER default 250;
 

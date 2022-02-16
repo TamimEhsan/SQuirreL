@@ -48,7 +48,7 @@ router.get('/:authorID', async (req, res) =>{
         page:offsetPage,
         pages:Math.ceil(booksCount/limits),
         cnt:booksCount,
-        target:'/authors/'+req.params.authorID+'&page='
+        target:'/authors/'+req.params.authorID+'?page='
     });
 });
 

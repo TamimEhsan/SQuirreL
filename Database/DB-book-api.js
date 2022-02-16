@@ -34,8 +34,8 @@ async function getAllBooksCount(){
 async function getBookByID(ID){
     const sql = `
         SELECT
-            book.id,book.name,book.PRICE,book.LANGUAGE,book.IMAGE,book.EDITION,book.ISBN,book.PAGE,book.PUBLISHING_YEAR,
-            COUNT(rates.stars) AS REVIEW_COUNT, NVL(SUM(rates.stars),0) AS STARS,
+            book.id,book.name,book.PRICE,book.LANGUAGE,book.IMAGE,book.EDITION,book.ISBN,book.PAGE,book.PUBLISHING_YEAR, BOOK.STAR AS STARS, BOOK.REVIEW_COUNT,
+            COUNT(rates.stars) AS REVIEW_COUNT2, NVL(SUM(rates.stars),0) AS STARS2,
             author.id AS author_id,author.name AS author_name,author.description AS author_description, author.image AS author_image,
             publisher.name AS publisher_name
         FROM
@@ -46,7 +46,7 @@ async function getBookByID(ID){
         WHERE
             book.id = :id
         GROUP BY
-                 book.id,book.name,book.PRICE,book.LANGUAGE,book.IMAGE,book.EDITION,book.ISBN,book.PAGE, book.PUBLISHING_YEAR,
+                 book.id,book.name,book.PRICE,book.LANGUAGE,book.IMAGE,book.EDITION,book.ISBN,book.PAGE, book.PUBLISHING_YEAR,book.star,book.REVIEW_COUNT,
                  author.id, author.name, author.description, author.image,
                  publisher.name
         `;
@@ -60,9 +60,7 @@ async function getBookByAuthorID(ID,offset,limit){
     const sql = `
         SELECT 
             book.*
-        FROM 
-            book
-        
+        FROM book
         JOIN author ON author.id = book.author_id
         WHERE 
             book.author_id = :id
@@ -90,7 +88,7 @@ async function getBookByAuthorIDCount(ID){
     }
     return (await database.execute(sql, binds, database.options)).rows;
 }
-async function getBooksByPublisherID(ID){
+async function getBooksByPublisherID(ID,offset,limit){
     const sql = `
         SELECT 
             book.*, 
@@ -103,17 +101,35 @@ async function getBooksByPublisherID(ID){
         JOIN publisher ON publisher.id = book.publisher_id
         WHERE 
             book.publisher_id = :id
+        ORDER BY book.name
+        OFFSET :offset ROWS 
+        FETCH NEXT :limit ROWS ONLY
+        `;
+    const binds = {
+        id:ID,offset,limit
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+async function getBookByPublisherIDCount(ID){
+    const sql = `
+        SELECT 
+            COUNT(*) AS CNT
+        FROM 
+            book
+        JOIN publisher ON publisher.id = book.publisher_id
+        WHERE 
+            book.publisher_id = :id
         `;
     const binds = {
         id:ID
     }
     return (await database.execute(sql, binds, database.options)).rows;
 }
-
 async function searchBooks(keyword,offset,limit){
     const sql = `
         SELECT
-            B.ID,B.NAME,B.IMAGE,B.STOCK,B.PRICE,A.NAME AS author_name
+            B.ID,B.NAME,B.IMAGE,B.STOCK,B.PRICE,B.STAR,B.REVIEW_COUNT,
+            A.NAME AS author_name
         FROM BOOK B
         JOIN AUTHOR A on B.AUTHOR_ID = A.ID
         JOIN PUBLISHER P on B.PUBLISHER_ID = P.ID
@@ -189,6 +205,7 @@ module.exports = {
     getBookByAuthorID,
     getBookByAuthorIDCount,
     getBooksByPublisherID,
+    getBookByPublisherIDCount,
     searchBooks,
     searchBooksCount,
     editBook,
