@@ -1,0 +1,59 @@
+
+<div class="row m-0">
+    <!--    menue-->
+    <div class="col-2 bg-dark text-white">
+        <div class="bg-dark text-white p-3" style="position:fixed;height: 100%;">
+            <div class="list-group list-group-dark list-group-flush">
+                <a href="/admin" class="list-group-item list-group-item-action text-white bg-dark" aria-current="true">Home</a>
+                <a href="/admin/book" class="list-group-item list-group-item-action text-white bg-dark">Books</a>
+                <a href="/admin/author" class="list-group-item list-group-item-action text-white bg-dark">Authors</a>
+                <a href="/admin/publisher" class="list-group-item list-group-item-action rounded">Publishers</a>
+                <a href="#" class="list-group-item list-group-item-action text-white bg-dark">Others</a>
+            </div>
+        </div>
+    </div>
+    <!--    contents-->
+    <div class="col-10 ">
+        <div class="shadow p-3 mb-3 mt-3">
+            <h3>Edit Voucher</h3>
+
+        </div>
+        <div  class="shadow p-3 mb-3 mt-3">
+            <form action="/admin/voucher/edit" method="post">
+                <input hidden type="text" name="id" value="<%=voucher.ID%>" class="form-control"
+                       id="nameInput" placeholder="name@example.com">
+                <h3>Main Info</h3>
+                <div class="mb-3 col-6">
+                    <label for="nameInput">Voucher Name</label>
+                    <input required type="text" name="name" value="<%=voucher.NAME%>" class="form-control"
+                           id="nameInput" placeholder="Enter the Voucher name...">
+                </div>
+                <hr>
+                <h3>Price Cut</h3>
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="discountInput">Discount percentage</label>
+                        <input required type="number" name="discount" value="<%=voucher.DISCOUNT%>" class="form-control"
+                               id="discountInput" placeholder="Enter the Voucher discount...">
+                    </div>
+                    <div class="mb-3 col-6">
+                        <label for="capInput">Maximum Discount (TK)</label>
+                        <input required type="number" name="cap" value="<%=voucher.CAP%>" class="form-control"
+                               id="capInput" placeholder="Enter the maximum decrease...">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="validity" class="form-label pb-1">Validity</label>
+                        <input required type="date" name="validity" value="<%=voucher.VALIDITY%>"
+                               class="form-control personal p-3 date-of-birth">
+                    </div>
+                </div>
+
+                <button class="btn btn-danger" type="submit">SAVE VOUCHER</button>
+                <a class="btn btn-secondary" href="/admin/voucher">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

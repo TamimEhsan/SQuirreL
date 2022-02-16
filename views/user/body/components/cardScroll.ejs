@@ -6,8 +6,18 @@
                 <div class="card " style="width: 12rem;">
                     <img class="card-img-top p-3" src="<%=books[i].IMAGE%>"  alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><%=books[i].BOOK_NAME%></h5>
-                        <b class="card-title"><%=books[i].AUTHOR_NAME%></b>
+                        <p style="color: #266dd3;font-weight: 650; font-size: 18px;" class="card-title"><%= books[i].BOOK_NAME %></p>
+                        <span style="font-weight: 510; font-size: 16px;"><%=books[i].AUTHOR_NAME%></span><br/>
+                        <span class="ml-0">
+                            <%if(books[i].REVIEW_COUNT){%>
+                                <% for(let stars = 0;stars < books[i].STAR / Math.max(books[i].REVIEW_COUNT, 1);stars++){ %>
+                                    ⭐
+                                <% } %>
+                            <%}else{%>
+                                No Reviews yet
+                            <%}%>
+                        </span>
+
                         <h6 class="card-title">Price: TK. <%=books[i].PRICE%></h6>
                         <a href=<%="/books/"+books[i].BOOK_ID%> class="btn btn-dark">View</a>
                     </div>

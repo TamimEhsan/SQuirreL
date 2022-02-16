@@ -10,9 +10,10 @@
                 //console.log(data.voucherId);
                 const voucherId = data.voucherId;
                 const discount = data.discount;
+                let cap = data.cap;
                 document.getElementById('voucherId').value = voucherId;
-                document.getElementById('giftvoucher').innerText = Math.floor(totalPrice*discount/100) + ' TK.';
-                document.getElementById('payable').innerText = ( totalPrice +50 -  Math.floor(totalPrice*discount/100) ) + ' TK.';
+                document.getElementById('giftvoucher').innerText = Math.min(Math.floor(totalPrice*discount/100), cap) + ' TK.';
+                document.getElementById('payable').innerText = ( totalPrice +50 -  Math.min(Math.floor(totalPrice*discount/100), cap)) + ' TK.';
                 var toastLiveExample = document.getElementById('liveToast')
                 var toast = new bootstrap.Toast(toastLiveExample)
                 toast.show();

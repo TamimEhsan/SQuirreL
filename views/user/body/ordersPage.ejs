@@ -27,7 +27,7 @@
         <section class="shadow mt-3 p-2">
             <div class=" d-flex justify-content-between align-items-center">
                 <div class="my-order__description">
-                    <h4>My Orders</h4>
+                    <h3>My Orders</h3>
                     <p>Your Total Order: <%=items.length%></p>
                     <p class="msg"></p>
                 </div>
@@ -55,9 +55,9 @@
             </div>
         </section>
         <%let statues = ['PROCESSING','APPROVED','ON SHIPPING','SHIPPED','COMPLETED','CANCELLED','RETURNED'];%>
-        <div class="d-flex flex-wrap justify-content-evenly">
+        <div class="d-flex flex-wrap justify-content-evenly shadow mt-3">
             <%for(let i =0;i<items.length;i++){%>
-            <div class="shadow mt-3 p-3">
+            <div class="border rounded-2 m-3 p-3">
                 <h5><b>Your Order Id: <%=items[i].ID%></b></h5>
                 <hr>
                 <span class="btn btn-outline-primary m-2 disabled"><%=statues[ items[i].STATE-1 ]%></span>
