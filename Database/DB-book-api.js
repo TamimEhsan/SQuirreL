@@ -34,10 +34,9 @@ async function getAllBooksCount(){
 async function getBookByID(ID){
     const sql = `
         SELECT
-            book.id,book.name,book.PRICE,book.LANGUAGE,book.IMAGE,book.EDITION,book.ISBN,book.PAGE,book.PUBLISHING_YEAR, BOOK.STAR AS STARS, BOOK.REVIEW_COUNT,
-            COUNT(rates.stars) AS REVIEW_COUNT2, NVL(SUM(rates.stars),0) AS STARS2,
+            book.id,book.name,book.PRICE,book.LANGUAGE,book.IMAGE,book.EDITION,book.ISBN,book.PAGE,book.PUBLISHING_YEAR, BOOK.STAR AS STARS, BOOK.REVIEW_COUNT, Book.genre, Book.stock,
             author.id AS author_id,author.name AS author_name,author.description AS author_description, author.image AS author_image,
-            publisher.name AS publisher_name
+            publisher.id as publisher_id,publisher.name AS publisher_name
         FROM
             book
         LEFT JOIN rates ON rates.BOOK_ID = book.id
@@ -45,10 +44,6 @@ async function getBookByID(ID){
         JOIN publisher ON publisher.id = book.publisher_id
         WHERE
             book.id = :id
-        GROUP BY
-                 book.id,book.name,book.PRICE,book.LANGUAGE,book.IMAGE,book.EDITION,book.ISBN,book.PAGE, book.PUBLISHING_YEAR,book.star,book.REVIEW_COUNT,
-                 author.id, author.name, author.description, author.image,
-                 publisher.name
         `;
     const binds = {
         id:ID
@@ -198,6 +193,8 @@ async function getNewBooks(){
     const binds = {}
     return (await database.execute(sql, binds, database.options)).rows;
 }
+
+
 module.exports = {
     getAllBooks,
     getAllBooksCount,

@@ -20,6 +20,7 @@ const authorRouter = require('./Admin/adminAuthor/adminAuthor');
 const publisherRouter = require('./Admin/adminPublisher/adminPublisher');
 const orderRouter = require('./Admin/adminOrder/adminOrder');
 const voucherRouter = require('./Admin/adminVoucher/adminVoucher');
+const restockRouter = require('./Admin/adminRestock/adminRestock');
 // ROUTE: home page
 router.get('/', require('./Admin/adminHome'));
 
@@ -31,6 +32,7 @@ router.use('/author', authorRouter);
 router.use('/publisher', publisherRouter);
 router.use('/order', orderRouter);
 router.use('/voucher', voucherRouter);
+router.use('/restock', restockRouter);
 
 
 

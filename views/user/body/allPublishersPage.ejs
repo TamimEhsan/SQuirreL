@@ -10,9 +10,14 @@
     <div class="card mb-1 m-1" style="width: 12rem;">
         <img class="card-img-top p-3 circular" src=<%=publishers[i].IMAGE%>
         alt="Card image cap">
-        <div class="card-body">
+        <div class="card-body" style="display: flex;flex-direction: column;justify-content:space-between;">
             <h5 class="card-title"><%=publishers[i].NAME%></h5>
-            <a href=<%="/publishers/"+publishers[i].ID%> class="btn btn-dark">View Details</a>
+            <div class="d-grid gap-2">
+            <a href=<%="/publishers/"+publishers[i].ID%> class="btn btn-warning">
+            <i class="bi bi-journals"></i>
+            View Publisher
+            </a>
+            </div>
         </div>
     </div>
     <% } %>

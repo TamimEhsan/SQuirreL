@@ -41,15 +41,24 @@
 <div class="row shadow m-0 mb-4 p-3">
     <div class="col-9">
         <div class="row no-gutters">
-            <div class="col-4">
+            <div class="col-4 mt-3">
                 <img class="img-thumbnail" src=<%= book.IMAGE %>>
             </div>
-            <div class="col">
-                <h3><%= book.NAME %></h3>
+            <div class="col mt-4">
+                <h3 class=""><%= book.NAME %></h3>
                 <p>by - <a href=<%= '/authors/' + book.AUTHOR_ID %>><%= book.AUTHOR_NAME %></a></p>
-                <h4>TK. <%= book.PRICE %></h4>
-                <% if(book.STOCK !== 0){ %>
 
+                <%if(book.GENRE){%>
+                    <% let bookgenre = book.GENRE.split(','); %>
+                    Category:
+                    <%for(let genre=0;genre<bookgenre.length;genre++){ console.log(bookgenre[genre]);%>
+                        <span class="badge bg-warning text-black"><%=bookgenre[genre]%></span>
+                    <%}%>
+                <br/>
+                <%}%>
+                <h4>TK. <%= book.PRICE %></h4>
+                <br/>
+                <% if(book.STOCK !== 0){ %>
                     <button class="btn btn-lg" onclick="makePUTrequest()"
                             style="background-color: #ff9900;color:white; padding-bottom: 0;padding-top: 0;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -59,7 +68,7 @@
                         Add to Cart
                     </button>
                 <% }else{ %>
-                    <button class="btn btn-lg" style="background-color:#59abe3;color:white;">Request for Stock</button>
+                    <button disabled class="btn btn-lg" style="background-color:#59abe3;color:white;">Out of Stock</button>
                 <% } %>
                 <br/>
 
@@ -85,14 +94,14 @@
             </div>
         </div>
     </div>
-    <div class="col-3 sidebar-info p-4 bg-light">
-        <div class="payment-info border-bottom">
+    <div class="col-3 sidebar-info p-2 bg-light">
+        <div class="payment-info">
             <div class="d-flex mt-3">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" fill="currentColor"
                      class="bi bi-wallet2" viewBox="0 0 16 16">
                     <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
                 </svg>
-                <p class="text-capitalize ml-3">Cash on delivery</p>
+                <p class="text-capitalize ms-3">Cash on delivery</p>
             </div>
             <div class="d-flex mt-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" fill="currentColor"
@@ -100,14 +109,14 @@
                     <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                     <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
                 </svg>
-                <p class="text-capitalize ml-3">7 days happy return</p>
+                <p class="text-capitalize ms-3">7 days happy return</p>
             </div>
             <div class="d-flex mt-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25px" height="25px" fill="currentColor"
                      class="bi bi-truck" viewBox="0 0 16 16">
                     <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
                 </svg>
-                <p class="text-capitalize ml-3">Delivery Charge Tk. 50(Online order)
+                <p class="text-capitalize ms-3">Delivery Charge <br/> Tk. 50 (Online)
                     <a href="#" class="btn btn-link details-tooltip px-0" data-toggle="tooltip" data-placement="top"
                        title="যে কোন পরিমাণ পণ্য অর্ডার করলেই সারাদেশে আমাদের ডেলিভারি চার্জ অনলাইন অর্ডারে 50(Online order) টাকা ও ফোন অর্ডারে 70(Phone order) টাকা।">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -123,7 +132,7 @@
                      class="bi bi-currency-exchange" viewBox="0 0 16 16">
                     <path d="M0 5a5.002 5.002 0 0 0 4.027 4.905 6.46 6.46 0 0 1 .544-2.073C3.695 7.536 3.132 6.864 3 5.91h-.5v-.426h.466V5.05c0-.046 0-.093.004-.135H2.5v-.427h.511C3.236 3.24 4.213 2.5 5.681 2.5c.316 0 .59.031.819.085v.733a3.46 3.46 0 0 0-.815-.082c-.919 0-1.538.466-1.734 1.252h1.917v.427h-1.98c-.003.046-.003.097-.003.147v.422h1.983v.427H3.93c.118.602.468 1.03 1.005 1.229a6.5 6.5 0 0 1 4.97-3.113A5.002 5.002 0 0 0 0 5zm16 5.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0zm-7.75 1.322c.069.835.746 1.485 1.964 1.562V14h.54v-.62c1.259-.086 1.996-.74 1.996-1.69 0-.865-.563-1.31-1.57-1.54l-.426-.1V8.374c.54.06.884.347.966.745h.948c-.07-.804-.779-1.433-1.914-1.502V7h-.54v.629c-1.076.103-1.808.732-1.808 1.622 0 .787.544 1.288 1.45 1.493l.358.085v1.78c-.554-.08-.92-.376-1.003-.787H8.25zm1.96-1.895c-.532-.12-.82-.364-.82-.732 0-.41.311-.719.824-.809v1.54h-.005zm.622 1.044c.645.145.943.38.943.796 0 .474-.37.8-1.02.86v-1.674l.077.018z"/>
                 </svg>
-                <p class="text-capitalize ml-3">Purchase &amp; Earn
+                <p class="text-capitalize ms-3">Purchase &amp; Earn
                     <a href="#" class="btn btn-link details-tooltip px-0" data-toggle="tooltip" data-placement="top"
                        title="প্রতি সফল কেনাকাটায় রেজিস্টার্ড ইউজার পাচ্ছেন পয়েন্টস। পয়েন্টস রকমারি ব্যালেন্স এ জমা করে  কিনতে পারছেন যে কোনো পণ্য।">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -166,11 +175,11 @@
                 </tr>
                 <tr>
                     <th>Author</th>
-                    <td><%= book.AUTHOR_NAME %></td>
+                    <td><a href=<%="/authors/"+book.AUTHOR_ID%> class="text-decoration-none"><%= book.AUTHOR_NAME %></a></td>
                 </tr>
                 <tr>
                     <th>Publisher</th>
-                    <td><%= book.PUBLISHER_NAME %></td>
+                    <td><a href=<%="/publishers/"+book.PUBLISHER_ID%> class="text-decoration-none"><%= book.PUBLISHER_NAME %></a></td>
                 </tr>
                 <tr>
                     <th>ISBN</th>

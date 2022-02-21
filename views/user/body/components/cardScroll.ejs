@@ -1,28 +1,40 @@
-
 <div class="container-fluid overflow-scroll my-scrollbar">
     <div class="row flex-nowrap">
-        <%for(let i=0;i<books.length;i++){%>
-            <div class="col">
-                <div class="card " style="width: 12rem;">
-                    <img class="card-img-top p-3" src="<%=books[i].IMAGE%>"  alt="Card image cap">
-                    <div class="card-body">
-                        <p style="color: #266dd3;font-weight: 650; font-size: 18px;" class="card-title"><%= books[i].BOOK_NAME %></p>
-                        <span style="font-weight: 510; font-size: 16px;"><%=books[i].AUTHOR_NAME%></span><br/>
-                        <span class="ml-0">
-                            <%if(books[i].REVIEW_COUNT){%>
-                                <% for(let stars = 0;stars < books[i].STAR / Math.max(books[i].REVIEW_COUNT, 1);stars++){ %>
-                                    ⭐
-                                <% } %>
-                            <%}else{%>
-                                No Reviews yet
-                            <%}%>
-                        </span>
+        <% for(let i = 0;i < books.length;i++){ %>
+        <div class="col">
+            <div class="card" style="width: 12rem;height: 100%;">
+                <img class="card-img-top p-3" src="<%= books[i].IMAGE %>" alt="Card image cap">
+                <div class="card-body" style="display: flex;flex-direction: column;justify-content:space-between;">
 
-                        <h6 class="card-title">Price: TK. <%=books[i].PRICE%></h6>
-                        <a href=<%="/books/"+books[i].BOOK_ID%> class="btn btn-dark">View</a>
+                    <div>
+                        <p style="color: #266dd3;font-weight: 650; font-size: 18px;"
+                           class="card-title"><%= books[i].BOOK_NAME %></p>
+                        <span style="font-weight: 510; font-size: 16px;"><%= books[i].AUTHOR_NAME %></span><br/>
+
+                    </div>
+
+                    <div>
+                            <span class="ml-0">
+                                <% if(books[i].REVIEW_COUNT){ %>
+                                    <% for(let stars = 0;stars < books[i].STAR / Math.max(books[i].REVIEW_COUNT, 1);stars++){ %>
+                                        ⭐
+                                    <% } %>
+                                <% }else{ %>
+                                    No Reviews yet
+                                <% } %>
+                            </span>
+                        <h6 class="card-title">Price: TK. <%= books[i].PRICE %></h6>
+                        <div class="d-grid gap-2">
+                            <a href=<%= "/books/"+books[i].BOOK_ID %> class="btn btn-warning">
+                            <i class="bi bi-book-half"></i>
+                            VIEW BOOK
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        <%}%>
+        </div>
+        <% } %>
     </div>
 </div>

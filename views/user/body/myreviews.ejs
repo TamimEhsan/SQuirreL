@@ -44,8 +44,8 @@
                                 <img src="<%= books[i].IMAGE %>" width="130px" height="186px">
                             </div>
                             <div class="col-9">
-                                <h5><%= books[i].BOOK_NAME %></h5>
-                                <p class="book-author pt-1"><%= books[i].AUTHOR_NAME %></p>
+                                <a href=<%="/books/"+books[i].BOOK_ID%> class="text-decoration-none text-primary bold"><h5><%= books[i].BOOK_NAME %></h5></a>
+                                <b class="book-author pt-1"><%= books[i].AUTHOR_NAME %></b>
                                 <p class="mt-2 rating-star">
                                     <%for(let j=0;j<books[i].STARS;j++){%>⭐<%}%><%=books[i].STARS%>
                                     <span class="text-secondary small ml-2">(You rated this book)</span>
@@ -54,7 +54,10 @@
                                 <span class="text-secondary mb-2 review-details"><%= books[i].REVIEW %></span>
 
                                 </div>
-                                <button id=<%= "editReviewBtn" + books[i].ID %> class="btn btn-dark btn-sm mt-2">Edit Your Review</button>
+                                <button id=<%= "editReviewBtn" + books[i].ID %> class="btn btn-warning btn-sm mt-2">
+                                <i class="bi bi-pencil"></i>
+                                Edit Your Review
+                                </button>
                             </div>
                         </div>
 
@@ -98,9 +101,12 @@
                             <img src="<%=unreviewdBooks[i].IMAGE%>" width="130px" height="186px">
                         </div>
                         <div class="col-9">
-                           <h5> <%=unreviewdBooks[i].BOOK_NAME%></h5>
-                            <p ><%=unreviewdBooks[i].AUTHOR_NAME%></p>
-                            <a class="btn btn-dark" href=<%="/books/"+unreviewdBooks[i].BOOK_ID%> class="edit-review" >Review</a>
+                            <a href=<%="/books/"+unreviewdBooks[i].BOOK_ID%> class="text-decoration-none text-primary bold "><h5 class="mt-3"><%= unreviewdBooks[i].BOOK_NAME %></h5></a>
+                            <b><%=unreviewdBooks[i].AUTHOR_NAME%></b><br/><br/>
+                            <a class="btn btn-outline-warning" href=<%="/books/"+unreviewdBooks[i].BOOK_ID%> class="edit-review" >
+                                <i class="bi bi-pencil"></i>
+                                Review
+                            </a>
 
                         </div>
                     </div>

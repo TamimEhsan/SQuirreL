@@ -39,6 +39,7 @@ END;
 
 
 -- Create new order
+
 CREATE OR REPLACE PROCEDURE CREATE_ORDER(UID IN NUMBER, VID IN NUMBER, NAME_ IN VARCHAR2, PHONE1_ IN VARCHAR2,
                                          PHONE2_ IN VARCHAR2,
                                          ADDRESS_ IN VARCHAR2, PICK_ IN NUMBER) IS
@@ -47,6 +48,9 @@ CREATE OR REPLACE PROCEDURE CREATE_ORDER(UID IN NUMBER, VID IN NUMBER, NAME_ IN 
     ITEM_COUNT      NUMBER;
     CAP_VALUE       NUMBER;
     DISCOUUNT_VALUE NUMBER;
+    STOCKED_OUT     NUMBER;
+    BID             NUMBER;
+    AMNT            NUMBER;
 BEGIN
     SELECT cart_id INTO CID FROM app_user WHERE id = UID;
     SELECT SUM(price * AMOUNT)
@@ -66,6 +70,21 @@ BEGIN
         RETURN ;
     end if;
 
+    -- Check for stock availibity
+    STOCKED_OUT := 0;
+    FOR R in (SELECT * FROM PICKED WHERE PICKED.CART_ID=CID)
+    LOOP
+        BID := R.BOOK_ID;
+        SELECT STOCK INTO AMNT FROM BOOK WHERE ID = BID;
+        IF R.AMOUNT > AMNT THEN
+            STOCKED_OUT := 1;
+        end if;
+    END LOOP;
+    IF STOCKED_OUT = 1 THEN
+        RETURN ;
+    end if;
+
+    -- Update total price after adding voucher
     IF VID IS NOT NULL THEN
         SELECT DISCOUNT INTO DISCOUUNT_VALUE
         FROM VOUCHER WHERE ID = VID AND VALIDITY>sysdate;
@@ -77,6 +96,7 @@ BEGIN
         PRICE_VALUE := CEIL(PRICE_VALUE);
     end if;
 
+    -- Insert into order
     INSERT INTO book_order(cart_id, voucher_id, total_price, total_item, name, phone1, phone2, address, pick, state)
     VALUES (CID, VID, PRICE_VALUE+50, ITEM_COUNT, NAME_, PHONE1_, PHONE2_, ADDRESS_, PICK_, 1);
 

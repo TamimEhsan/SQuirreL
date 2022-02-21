@@ -1,5 +1,5 @@
 <!-- Horizontal Steppers -->
-<div class="shadow mt-3 p-3 bs-stepper">
+<div class="card-color card-round mt-3 p-3 bs-stepper">
     <h4>Your Order Delivery Information</h4><hr>
     <div class="bs-stepper-header" role="tablist">
         <!-- your steps here -->
@@ -38,7 +38,7 @@
 
 <div class="row">
     <div class="col-3">
-        <div class="shadow mt-3 p-3">
+        <div class="card-color card-round mt-3 p-3">
             <h5><b>Delivery To</b></h5>
             <hr>
             <b>Name:</b><br/>
@@ -50,13 +50,13 @@
             <b>Alternative Phone:</b><br/>
             <span><%= items.PHONE2 %></span>
         </div>
-        <div class="shadow mt-3 p-3">
+        <div class="card-color card-round mt-3 p-3">
             <h5><b>Delivery Address</b></h5>
             <hr>
             <b>Home:</b><br/>
             <span><%= items.ADDRESS %></span>
         </div>
-        <div class="shadow mt-3 p-3">
+        <div class="card-color card-round mt-3 p-3">
             <h5><b>Order Details</b></h5>
             <hr>
             <b>Total Price:</b><br/>
@@ -66,7 +66,7 @@
         </div>
     </div>
     <div class="col-9">
-        <section class="shadow mt-3 p-2">
+        <section class="card-color card-round mt-3 p-2">
             <h4>Order Summary</h4>
             <% for(let i = 0;i < books.length;i++){ %>
             <hr>
@@ -75,8 +75,8 @@
                     <img src=<%= books[i].IMAGE %> class="img-fluid"/>
                 </div>
                 <div class="col-4">
-                    <%= books[i].BOOK_NAME %> <br/>
-                    <%= books[i].AUTHOR_NAME %>
+                    <a href=<%="/books/"+books[i].BOOK_ID%> class="text-decoration-none text-primary bold "><h5><%= books[i].BOOK_NAME %></h5></a>
+                    <b><%= books[i].AUTHOR_NAME %></b>
                 </div>
                 <div class="col-2">
                     Price: TK.<%= books[i].PRICE %>
