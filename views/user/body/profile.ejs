@@ -1,8 +1,6 @@
-
-
 <div class="row">
     <div class="col-3">
-        <div class="shadow mt-3 p-2">
+        <div class="shadow  mt-3 p-2">
             <div class="row no-gutters">
                 <div class="col-3">
                     <img class="circular" src="<%=user.IMAGE%>" width="50">
@@ -13,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <div class="shadow mt-3 p-2">
+        <div class="shadow  mt-3 p-2">
             <div class="list-group list-group-flush">
                 <a href="/my-section/profile" class="list-group-item list-group-item-action active" aria-current="true">My Account</a>
                 <a href="/my-section/orders" class="list-group-item list-group-item-action ">My Orders</a>
@@ -27,7 +25,10 @@
         <div class="shadow p-3 mt-3 d-flex justify-content-between">
 
             <h3>Profile</h3>
-            <a class="btn btn-outline-primary ms-2" href="/my-section/profile/edit">Edit Profile</a>
+            <a class="btn btn-outline-warning ms-2" href="/my-section/profile/edit">
+                <i class="bi bi-pencil-square"></i>
+                Edit Profile
+            </a>
 
 
         </div>
@@ -48,23 +49,6 @@
                             <input disabled type="date" name="dob" value="<%=user.DOB%>"
                                    class="form-control personal p-3 date-of-birth">
                         </div>
-<!--                        <p>Gender</p>-->
-<!--                        <div class="d-flex justify-content-lg-start">-->
-<!--                            <div class="form-check me-3">-->
-<!--                                <input disabled class="form-check-input" type="radio" name="gender" id="flexRadioDefault1"-->
-<!--                                       value="0">-->
-<!--                                <label class="form-check-label" for="flexRadioDefault1">-->
-<!--                                    Male-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                            <div class="form-check">-->
-<!--                                <input disabled class="form-check-input" type="radio" name="gender" id="flexRadioDefault2"-->
-<!--                                       checked value="1">-->
-<!--                                <label class="form-check-label" for="flexRadioDefault2">-->
-<!--                                    Female-->
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                        </div>-->
 
                     </div>
                 </div>

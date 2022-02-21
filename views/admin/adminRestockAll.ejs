@@ -1,0 +1,70 @@
+
+<div class="row m-0">
+    <!--    menue-->
+    <div class="col-2 bg-dark text-white">
+        <div class="bg-dark text-white p-3" style="position:fixed;height: 100%;">
+            <div class="list-group list-group-dark list-group-flush">
+                <a href="/admin" class="list-group-item list-group-item-action text-white bg-dark" aria-current="true">Home</a>
+                <a href="/admin/book" class="list-group-item list-group-item-action rounded">Books</a>
+                <a href="/admin/author" class="list-group-item list-group-item-action text-white bg-dark">Authors</a>
+                <a href="/admin/publisher" class="list-group-item list-group-item-action text-white bg-dark">Publishers</a>
+                <a href="/admin/order" class="list-group-item list-group-item-action text-white bg-dark">Orders</a>
+                <a href="/admin/voucher" class="list-group-item list-group-item-action text-white bg-dark">Vouchers</a>
+            </div>
+        </div>
+    </div>
+    <!--    contents-->
+    <div class="col-10 ">
+        <div class="shadow p-3 mb-3 mt-3">
+            <a class="btn btn-warning" href="/admin/book">
+                <i class="fas fa-plus"></i>
+                BACK
+            </a>
+            <h3>Restock Books</h3>
+
+        </div>
+        <h6>(Showing <%=start+1%> to <%=start+books.length%> of <%=cnt%> books)</h6>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Author</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Restock</th>
+                <th scope="col">Action</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <% for(let i = 0;i < books.length;i++){ %>
+                <form method="get" action="/admin/restock/update">
+                    <input hidden name="bookId" value="<%=books[i].ID%>">
+                    <tr>
+                        <th scope="row"><%= books[i].ID %></th>
+                        <td><img class="img-thumbnail" width="100px" src="<%= books[i].IMAGE %>"/></td>
+                        <td><%= books[i].NAME %></td>
+                        <td><%= books[i].AUTHOR_ID %></td>
+                        <td><%= books[i].PUBLISHER_ID %></td>
+                        <td><%= books[i].STOCK %></td>
+                        <td>
+                            <input required type="number" name="restock" class="form-control" value="<%= books[i].STOCK %>">
+                        </td>
+                        <td>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-warning">RESTOCK</button>
+                            </div>
+                        </td>
+                    </tr>
+                </form>
+            <% } %>
+
+            </tbody>
+        </table>
+        <div style="margin: auto" id="paginationDiv" data-pages=<%=pages%> data-page=<%=currentPage%>
+             data-href=<%=target%>  ></div>
+        <script async src="/scripts/pagination.js"></script>
+    </div>
+</div>

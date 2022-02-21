@@ -32,7 +32,7 @@ async function getAssignedCart(userId){
 async function getItemsInCart(userId){
     const sql =`
         SELECT picked.*,
-        book.id as book_id,book.name as book_name,book.price, book.image, 
+        book.id as book_id,book.name as book_name,book.price, book.image,book.stock,
         author.name as author_name
         FROM picked
         JOIN app_user ON app_user.cart_id = picked.cart_id and app_user.id = :userId

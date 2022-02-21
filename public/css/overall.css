@@ -1,3 +1,25 @@
 .circular{
     border-radius:100%;
 }
+
+body{
+    font-family: Poppins, Helvetica, sans-serif !important;
+}
+
+.card-round{
+    border-radius: .95rem;
+}
+.card-color{
+    background-color: rgba(248,246,242,.3);
+    border: 1px dashed #e8e5dd;
+    box-shadow: none;
+}
+
+
+/*Cart page*/
+.list-group-item.active{
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+
+}
+

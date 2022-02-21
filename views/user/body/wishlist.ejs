@@ -32,7 +32,8 @@
                     <img class="img-fluid img-thumbnail" style="max-width: 130px" src="<%= wishList[i].IMAGE %>"/>
                 </div>
                 <div class="col-9">
-                    <h4><%= wishList[i].BOOK_NAME %></h4>
+                    <a href=<%="/books/"+wishList[i].BOOK_ID%> class="text-decoration-none text-primary bold"><h5><%= wishList[i].BOOK_NAME %></h5></a>
+
                     <b><%= wishList[i].AUTHOR_NAME %></b>
                     <h5>Price: <%= wishList[i].PRICE %></h5>
                     <a href=<%= "/my-section/wishlist/remove/"+wishList[i].BOOK_ID %>   class="btn btn-outline-danger">
