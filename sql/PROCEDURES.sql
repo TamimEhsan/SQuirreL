@@ -71,15 +71,7 @@ BEGIN
     end if;
 
     -- Check for stock availibity
-    STOCKED_OUT := 0;
-    FOR R in (SELECT * FROM PICKED WHERE PICKED.CART_ID=CID)
-    LOOP
-        BID := R.BOOK_ID;
-        SELECT STOCK INTO AMNT FROM BOOK WHERE ID = BID;
-        IF R.AMOUNT > AMNT THEN
-            STOCKED_OUT := 1;
-        end if;
-    END LOOP;
+    STOCKED_OUT := HAS_STOCK(CID);
     IF STOCKED_OUT = 1 THEN
         RETURN ;
     end if;

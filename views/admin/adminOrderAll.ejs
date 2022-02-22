@@ -19,13 +19,14 @@
             <h3>Orders List</h3>
         </div>
         <div class="shadow p-3 mb-3 mt-3">
-            <div class="row">
+            <div class="row ">
                 <div class="col-1"> ID</div>
                 <div class="col-3"> Name</div>
-                <div class="col-2"> Total Price</div>
-                <div class="col-2"> Total Item</div>
-                <div class="col-2"> State</div>
-                <div class="col-2"> Submit</div>
+                <div class="col-1"> Total Price</div>
+                <div class="col-1"> Total Item</div>
+                <div class="col-3"> State</div>
+                <div class="col-1"> Submit</div>
+                <div class="col-1"> Details</div>
             </div>
             <hr>
             <% for(let i = 0;i < orders.length;i++){ %>
@@ -34,7 +35,7 @@
                     <div class="row">
                         <div class="col-1"> <%= orders[i].ID %></div>
                         <div class="col-3"> <%= orders[i].NAME %></div>
-                        <div class="col-2"> <%= orders[i].TOTAL_PRICE %></div>
+                        <div class="col-1"> <%= orders[i].TOTAL_PRICE %></div>
                         <div class="col-1"> <%= orders[i].TOTAL_ITEM %></div>
                         <div class="col-3">
                             <select id=<%='select'+i%>  name="orderStatus" class="form-select m-1">
@@ -47,8 +48,11 @@
                                 <option value="7">Returned</option>
                             </select>
                         </div>
-                        <div class="col-2">
+                        <div class="col-1">
                             <button type="submit" class="btn btn-outline-primary btn-sm">Update</button>
+                        </div>
+                        <div class="col-2">
+                            <a class="btn btn-outline-primary btn-sm ms-2" target="_blank" href=<%="/admin/order/"+orders[i].ID%>>Details</a>
                         </div>
                     </div>
                 </form>

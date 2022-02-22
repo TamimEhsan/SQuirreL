@@ -153,10 +153,10 @@ async function searchBooksCount(keyword){
     }
     return (await database.execute(sql, binds, database.options)).rows;
 }
-async function editBook(id,image,page,year,price,edition){
+async function editBook(id,image,page,year,price,edition,stock){
     const sql = `
         UPDATE BOOK
-        SET image = :image, page = :page, publishing_year = :year, price = :price, edition = :edition
+        SET image = :image, page = :page, publishing_year = :year, price = :price, edition = :edition, stock = :stock
         WHERE id = :id
     `
     const binds = {
@@ -165,7 +165,8 @@ async function editBook(id,image,page,year,price,edition){
         page:page,
         year:year,
         price:price,
-        edition:edition
+        edition:edition,
+        stock:stock
     }
     await database.execute(sql, binds, database.options);
     return ;

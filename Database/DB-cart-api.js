@@ -63,6 +63,22 @@ async function getItemsInCartByCartId(userId,cartId){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function getItemsInCartByCartIdAdmin(cartId){
+    const sql =`
+        SELECT picked.*,
+        book.id as book_id,book.name as book_name,book.price, book.image, 
+        author.name as author_name
+        FROM picked
+        JOIN cart ON picked.cart_id = cart.id AND cart.id = :cartId
+        JOIN book ON book.id = picked.book_id
+        JOIN author ON author.id = book.author_id
+    `;
+    const binds = {
+        cartId:cartId
+    }
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
 async function deleteItemFromCart(userId,bookId){
     const sql = `
         DELETE FROM picked
@@ -195,5 +211,6 @@ module.exports = {
     updateAmount,
     getTotalPrice,
     getTotalPriceAndItem,
-    getItemsInCartByCartId
+    getItemsInCartByCartId,
+    getItemsInCartByCartIdAdmin
 }

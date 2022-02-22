@@ -8,10 +8,12 @@
     <% for(let i = 0;i < authors.length;i++){ %>
 
         <div class="card mb-1 m-1" style="width: 12rem;">
-            <img class="card-img-top p-3 circular" src=<%= authors[i].IMAGE %>
+            <img class="img-fluid p-3 circular" src=<%= authors[i].IMAGE %>
             alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><%= authors[i].NAME %></h5>
+
+            <div class="card-body" style="display: flex;flex-direction: column;justify-content:space-between;">
+
+            <h5 class="card-title"><%= authors[i].NAME %></h5>
 
                 <div class="d-grid gap-2">
                     <a href=<%= "/authors/" + authors[i].ID %> class="btn btn-warning btn-sm">

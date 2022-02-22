@@ -1,10 +1,23 @@
-
-
-<div class="shadow p-3 mt-3">
-    <% for(let i=0;i<books.length;i++){ %>
-        <h5> <%= books[i].NAME %> </h5>
-        <span>Price:<%=books[i].PRICE%></span><br/>
-        <a href=<%="/books/"+books[i].ID%> class="btn btn-outline-primary">VIEW BOOK</a>
-        <hr>
-    <%}%>
+<div class="card-round card-color p-2">
+    <div>
+        <h2><b>About Squirrel</b></h2>
+        <span>Squirrel is an oracle powered bootstrapped node Website. It is a faithful copy of Rokomari.com. You'll find many features that is in the main site. We tried best of our ability to create something in this short time.
+</span>
+    </div>
+    <hr>
+    <div>
+        <h2><b>Meet the team</b></h2>
+        <div class="row">
+            <div class="col-3 text-center">
+                <img class="rounded rounded-3" height="150px" src="https://avatars.githubusercontent.com/u/54908501?v=4"/>
+                <br/>
+                <div > <b>Tamim Ehsan</b></div>
+            </div>
+            <div class="col-3 text-center">
+                <img class="rounded rounded-3" height="150px" src="https://avatars.githubusercontent.com/u/54444355?v=4"/>
+                <br/>
+                <div > <b>Sachin Deb</b></div>
+            </div>
+        </div>
+    </div>
 </div>

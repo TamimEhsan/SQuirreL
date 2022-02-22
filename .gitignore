@@ -38,3 +38,8 @@ pdfLayout
 Testing Features
 #large images
 public/images/books
+
+# Userless sql
+sql/data.sql
+sql/data books only.sql
+sql/DDL.sql
