@@ -17,11 +17,11 @@
         <div class="shadow p-3 mb-3 mt-3">
             <h3>Book List</h3>
             <a class="btn btn-primary" href="/admin/book/add">
-                <i class="fas fa-plus"></i>
+                <i class="bi bi-plus-lg"></i>
                 ADD NEW BOOK
             </a>
             <a class="btn btn-warning" href="/admin/restock">
-                <i class="fas fa-plus"></i>
+                <i class="bi bi-box-seam"></i>
                 RESTOCK BOOK
             </a>
             <form class="d-flex" action="/admin/book/search" method="get">
@@ -82,7 +82,6 @@
                         <div class="d-grid">
                             <a href=<%= "/admin/book/edit/"+books[i].ID %> class="btn btn-secondary btn-sm
                                mb-1">Update</a><br/>
-                            <a class="btn btn-danger btn-sm">Delete</a>
                         </div>
                     </td>
                 </tr>

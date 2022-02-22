@@ -1,0 +1,86 @@
+
+<div class="row m-0">
+    <!--    menue-->
+    <div class="col-2 bg-dark text-white">
+        <div class="bg-dark text-white p-3" style="position:fixed;height: 100%;">
+            <div class="list-group list-group-dark list-group-flush">
+                <a href="/admin" class="list-group-item list-group-item-action text-white bg-dark" aria-current="true">Home</a>
+                <a href="/admin/book" class="list-group-item list-group-item-action text-white bg-dark">Books</a>
+                <a href="/admin/author" class="list-group-item list-group-item-action text-white bg-dark">Authors</a>
+                <a href="/admin/publisher" class="list-group-item list-group-item-action text-white bg-dark">Publishers</a>
+                <a href="/admin/order" class="list-group-item list-group-item-action rounded">Orders</a>
+                <a href="/admin/voucher" class="list-group-item list-group-item-action text-white bg-dark">Vouchers</a>
+            </div>
+        </div>
+    </div>
+    <!--    contents-->
+    <div class="col-10 ">
+        <div class="shadow p-3 mb-3 mt-3">
+            <h3>Orders List</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <div class="card-color card-round mt-3 p-3">
+                    <h5><b>Delivery To</b></h5>
+                    <hr>
+                    <b>Name:</b><br/>
+                    <span><%= items.NAME %></span>
+                    <hr>
+                    <b>Phone:</b><br/>
+                    <span><%= items.PHONE1 %></span>
+                    <hr>
+                    <b>Alternative Phone:</b><br/>
+                    <span><%= items.PHONE2 %></span>
+                </div>
+                <div class="card-color card-round mt-3 p-3">
+                    <h5><b>Delivery Address</b></h5>
+                    <hr>
+                    <b>Home:</b><br/>
+                    <span><%= items.ADDRESS %></span>
+                </div>
+                <div class="card-color card-round mt-3 p-3">
+                    <h5><b>Order Details</b></h5>
+                    <hr>
+                    <b>Total Price:</b><br/>
+                    <span><%= items.TOTAL_PRICE %></span><hr>
+                    <b>Total Item:</b><br/>
+                    <span><%= items.TOTAL_ITEM %></span>
+                </div>
+            </div>
+            <div class="col-9">
+                <section class="card-color card-round mt-3 p-2">
+                    <h4>Order Summary</h4>
+                    <% for(let i = 0;i < books.length;i++){ %>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2">
+                                <img src=<%= books[i].IMAGE %> class="img-fluid"/>
+                            </div>
+                            <div class="col-4">
+                                <a href=<%="/books/"+books[i].BOOK_ID%> class="text-decoration-none text-primary bold "><h5><%= books[i].BOOK_NAME %></h5></a>
+                                <b><%= books[i].AUTHOR_NAME %></b>
+                            </div>
+                            <div class="col-2">
+                                Price: TK.<%= books[i].PRICE %>
+                            </div>
+                            <div class="col-2">
+                                Qty:<%= books[i].AMOUNT %>
+                            </div>
+                            <div class="col-2">
+                                TK.<%= books[i].AMOUNT*books[i].PRICE %>
+                            </div>
+                        </div>
+
+                    <% } %>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    // console.log(document.getElementById('orderStatus'));
+</script>

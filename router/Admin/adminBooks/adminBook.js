@@ -88,8 +88,8 @@ router.post('/edit', async (req, res) =>{
     if( req.admin == null )
         return res.redirect('/admin/login');
     console.log(req.body);
-    const {id,image,page,year,price,edition} = req.body;
-    const updateResult = await DB_book.editBook(id,image,page,year,price,edition);
+    const {id,image,page,year,price,edition,stock} = req.body;
+    const updateResult = await DB_book.editBook(id,image,page,year,price,edition,stock);
     res.redirect('/admin/book')
 });
 router.post('/add', async (req, res) =>{

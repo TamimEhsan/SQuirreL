@@ -66,7 +66,7 @@ router.use('/logout', logoutRouter);
 router.use('/books', bookRouter);
 router.use('/authors', authorRouter);
 router.use('/publishers', publisherRouter);
-router.use('/bestseller',bestsellerRouter);
+router.use('/aboutus',bestsellerRouter);
 
 router.use('/reviews', reviewRouter);
 
