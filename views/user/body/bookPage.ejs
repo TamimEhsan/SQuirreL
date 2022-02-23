@@ -51,8 +51,14 @@
                 <%if(book.GENRE){%>
                     <% let bookgenre = book.GENRE.split(','); %>
                     Category:
-                    <%for(let genre=0;genre<bookgenre.length;genre++){ console.log(bookgenre[genre]);%>
-                        <span class="badge bg-warning text-black"><%=bookgenre[genre]%></span>
+                    <%for(let genre=0;genre<bookgenre.length;genre++){ %>
+
+                        <span class="badge bg-warning text-black">
+                            <a class="text-decoration-none text-black" href=<%="/books/search?keyword="+bookgenre[genre]%>>
+                            <%=bookgenre[genre]%>
+                            </a>
+                        </span>
+
                     <%}%>
                 <br/>
                 <%}%>
