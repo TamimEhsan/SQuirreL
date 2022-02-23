@@ -115,7 +115,7 @@ Make sure you have node and oracle installed in your device.
 
    
 
-4. Find file dump.sql in `sql/dump.sql`
+4. Find file dump.sql in `sql/SQL_DUMP.sql`
 
 5. Head over to your favourite database GUI and connect squirrel with that
 
@@ -241,13 +241,13 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
   - **Professor**
 
-    ![img](https://cse.buet.ac.bd/images/listmarkxpgreen.gif)  **Contact:**
+    ▶ **Contact:**
 
     Department of Computer Science and Engineering
     Bangladesh University of Engineering and Technology
     Dhaka-1000, Bangladesh
 
-    ![img](https://cse.buet.ac.bd/images/listmarkxpgreen.gif)  **Homepage:**
+    ▶   **Homepage:**
 
     [http://rifatshahriyar.github.io/](http://rifatshahriyar.github.io/)
 
