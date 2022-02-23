@@ -88,8 +88,8 @@ router.post('/edit', async (req, res) =>{
     if( req.admin == null )
         return res.redirect('/admin/login');
     console.log(req.body);
-    const {id,image,page,year,price,edition,stock} = req.body;
-    const updateResult = await DB_book.editBook(id,image,page,year,price,edition,stock);
+    const {id,image,page,year,price,edition,stock,genre} = req.body;
+    const updateResult = await DB_book.editBook(id,image,page,year,price,edition,stock,genre);
     res.redirect('/admin/book')
 });
 router.post('/add', async (req, res) =>{
@@ -97,8 +97,8 @@ router.post('/add', async (req, res) =>{
     if( req.admin == null )
         return res.redirect('/admin/login');
     console.log(req.body);
-    const {name,author_id,publisher_id,image,language,isbn,page,year,price,edition} = req.body;
-    const addResult = await DB_book.addBook(name,author_id,publisher_id,image,language,isbn,page,year,price,edition);
+    const {name,author_id,publisher_id,image,language,isbn,page,year,price,edition,stock,genre} = req.body;
+    const addResult = await DB_book.addBook(name,author_id,publisher_id,image,language,isbn,page,year,price,edition,stock,genre);
     //const updateResult = await DB_book.editBook(id,image,page,year,price,edition);
     res.redirect('/admin/book');
 });

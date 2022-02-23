@@ -98,16 +98,16 @@
                 <div class="row ">
                     <div class="col-6">
                         <div class="mb-3">
-                            <label for="pageInput">Price</label>
+                            <label for="priceInput">Price</label>
                             <input type="number" name="price" value="<%=book.PRICE%>" class="form-control"
-                                   id="pageInput" placeholder="">
+                                   id="priceInput" placeholder="">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
-                            <label for="pageInput">Edition</label>
+                            <label for="editionInput">Edition</label>
                             <input type="text" name="edition" value="<%=book.EDITION%>" class="form-control"
-                                   id="pageInput" placeholder="">
+                                   id="editionInput" placeholder="">
                         </div>
                     </div>
 
@@ -115,9 +115,16 @@
                 <div class="row ">
                     <div class="col-6">
                         <div class="mb-3">
-                            <label for="pageInput">Stock</label>
+                            <label for="stockInput">Stock</label>
                             <input required type="number" name="stock" value="<%=book.STOCK%>" class="form-control"
-                                   id="pageInput" placeholder="">
+                                   id="stockInput" placeholder="">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="genreInput">Genre</label>
+                            <input required type="text" name="genre" value="<%= book.GENRE %>" class="form-control"
+                                   id="genreInput" placeholder="">
                         </div>
                     </div>
 
