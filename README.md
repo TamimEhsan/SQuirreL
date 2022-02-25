@@ -30,14 +30,12 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+
   </ol>
 </details>
+
 
 
 
@@ -46,9 +44,9 @@
 
 Squirrel is an oracle powered bootstrapped node Website. It is a faithful copy of Rokomari.com. You'll find many features that is in the main site. We tried best of our ability to create something in this short time. 
 
-### Built With :heart: and
+Youtube Demo: https://youtu.be/eeUI5hNmdYo
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+### Built With :heart: and
 
 - Nodejs
 - EJS
@@ -153,7 +151,7 @@ APP_SECRET=iLoveSquirrel
 
 #### Getting the big static data
 
-We are almost done. As there are size restrictions of files, we couldn't upload the images in github 😪. So go to [drive](https://drive.google.com/file/d/1P9d5But_VUcviEykeNlIUvejf0JQnAQY/view?usp=sharing) and download the images. paste the folder in public/images. The directory tree should be like this
+We are almost done. As there are size restrictions of files, we couldn't upload the images in github 😪. So go to  :arrow_forward: [drive](https://drive.google.com/file/d/1P9d5But_VUcviEykeNlIUvejf0JQnAQY/view?usp=sharing) :arrow_backward: and download the images. paste the folder in public/images. The directory tree should be like this
 
 ```sh
 SQuirreL/
@@ -188,36 +186,8 @@ You should find that the project is working!
 
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
@@ -241,24 +211,15 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
   - **Professor**
 
-    ▶ **Contact:**
+    :arrow_forward:  **Contact:**
 
     Department of Computer Science and Engineering
     Bangladesh University of Engineering and Technology
     Dhaka-1000, Bangladesh
 
-    ▶   **Homepage:**
+    :arrow_forward:   **Homepage:**
 
     [http://rifatshahriyar.github.io/](http://rifatshahriyar.github.io/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* https://react-icons.github.io/react-icons/search)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
