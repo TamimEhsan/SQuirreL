@@ -44,6 +44,8 @@
 
 Squirrel is an oracle powered bootstrapped node Website. It is a faithful copy of Rokomari.com. You'll find many features that is in the main site. We tried best of our ability to create something in this short time. 
 
+Youtube Demo: https://youtu.be/eeUI5hNmdYo
+
 ### Built With :heart: and
 
 - Nodejs
