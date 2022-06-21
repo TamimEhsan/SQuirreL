@@ -46,7 +46,13 @@ Squirrel is an oracle powered bootstrapped node Website. It is a faithful copy o
 
 Youtube Demo: https://youtu.be/eeUI5hNmdYo
 
-### Built With :heart: and
+## ERD
+
+![](\Assets\erd.png)
+
+
+
+## Built With :heart: and
 
 - Nodejs
 - EJS
@@ -222,5 +228,4 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
     [http://rifatshahriyar.github.io/](http://rifatshahriyar.github.io/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
