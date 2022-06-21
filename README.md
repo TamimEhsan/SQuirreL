@@ -48,7 +48,7 @@ Youtube Demo: https://youtu.be/eeUI5hNmdYo
 
 ## ERD
 
-![](\Assets\erd.png)
+![](https://raw.githubusercontent.com/TamimEhsan/SQuirreL/master/Assets/erd.png)
 
 
 
